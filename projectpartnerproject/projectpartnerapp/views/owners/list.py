@@ -1,9 +1,10 @@
 import sqlite3
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from projectpartnerapp.models import Owner
 from ..connection import Connection
 
-
+@login_required
 def owner_list(request):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row

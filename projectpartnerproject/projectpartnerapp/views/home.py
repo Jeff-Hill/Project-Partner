@@ -1,11 +1,10 @@
 import sqlite3
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from projectpartnerapp.models import Project
-from ..connection import Connection
+from .connection import Connection
 
-@login_required
-def project_list(request):
+
+def home(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = sqlite3.Row
@@ -40,7 +39,7 @@ def project_list(request):
 
                 all_projects.append(project)
 
-        template = 'projects/list.html'
+        template = 'home.html'
         context = {
             'all_projects': all_projects
         }
