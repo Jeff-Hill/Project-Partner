@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>Your Projects</h1>
+
+    <ul style="list-style-type:none">
+    {% for project in all_projects %}
+
+            <li>Project Name: {{ project.name }}</li>
+            <li>Description: {{project.description}}</li>
+            <li>Location: {{project.location}}</li>
+            <li>Width: {{project.width}}</li>
+            <li>Length: {{project.length}}</li>
+            <li>Square Footage: {{project.width}} x {{project.length}} = {{project.location_sq_footage}}</li>
+
+
+    {% endfor %}
+    </ul>
+  </body>
+</html>
