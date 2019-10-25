@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>Your Tools</h1>
+
+    <ul style="list-style-type:none">
+    {% for tool in all_tools %}
+
+            <li>Tool Name: {{ tool.name }}</li>
+            <li>Manufacturer: {{ tool.manufacturer }}</li>
+            <li>Description: {{tool.description}}</li>
+            <li>Cost: ${{tool.cost}}</li>
+            {% if tool.own == 0 %}
+            <li>Own this tool: No</li>
+            {% elif tool.own == 1 %}
+            <li>Own this tool: Yes</li>
+            {% endif %}
+            <br></br>
+    {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>Owners</h1>
+
+    <ol>
+    {% for owner in all_owners %}
+        <li>{{ owner.first_name }} {{ owner.last_name }}</li>
+    {% endfor %}
+    </ol>
+  </body>
+</html>

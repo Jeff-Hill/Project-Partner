@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>Your Materials</h1>
+
+    <ul style="list-style-type:none">
+    {% for material in all_materials %}
+
+            <li>Material Name: {{ material.name }}</li>
+            <li>Description: {{material.description}}</li>
+            <li>Cost: {{material.cost}}</li>
+            <li>Quantity: {{material.quantity}}</li>
+            <li>Project: {{material.project_id}}</li>
+            <br></br>
+    {% endfor %}
+    </ul>
+  </body>
+</html>
