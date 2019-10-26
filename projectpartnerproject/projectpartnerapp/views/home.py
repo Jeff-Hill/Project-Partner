@@ -1,13 +1,10 @@
 import sqlite3
 from django.shortcuts import render
-from django.urls import reverse
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
 from projectpartnerapp.models import Project
-from ..connection import Connection
+from .connection import Connection
 
-@login_required
-def project_list(request):
+
+def home(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = sqlite3.Row
@@ -16,12 +13,12 @@ def project_list(request):
             db_cursor.execute("""
             select
                 p.id,
+                p.owner_id,
                 p.name,
                 p.description,
                 p.location,
-                p.width,
                 p.length,
-                p.owner_id,
+                p.width,
                 p.completed
             from projectpartnerapp_project p
             """)
@@ -42,29 +39,9 @@ def project_list(request):
 
                 all_projects.append(project)
 
-        template = 'projects/list.html'
+        template = 'home.html'
         context = {
             'all_projects': all_projects
         }
 
         return render(request, template, context)
-
-    elif request.method == 'POST':
-        form_data = request.POST
-
-        with sqlite3.connect(Connection.db_path) as conn:
-            db_cursor = conn.cursor()
-
-            db_cursor.execute("""
-            INSERT INTO projectpartnerapp_project
-            (
-                name, description, location,
-                width, length, owner_id
-            )
-            VALUES (?, ?, ?, ?, ?, ?)
-            """,
-            (form_data['name'], form_data['description'],
-            form_data['location'], form_data['width'], form_data['length'],
-            request.user.owner.id))
-
-        return redirect(reverse('projectpartnerapp:projects'))

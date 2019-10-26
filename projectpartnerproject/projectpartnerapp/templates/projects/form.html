@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>Step 1 of 3</h1>
+
+
+    <form action="{% url 'projectpartnerapp:projects' %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="name">Project Name: </label>
+          <input id="name" type="text" name="name" placeholder="Name Your Project">
+      </fieldset>
+      <fieldset>
+          <label for="description">Description: </label>
+          <input id="description" type="text" name="description" placeholder="Described Project">
+      </fieldset>
+      <fieldset>
+          <label for="location">Location: </label>
+          <input id="location" type="text" name="location" placeholder="Area of Home">
+      </fieldset>
+      <fieldset>
+          <label for="width">Width: </label>
+          <input id="width" type="text" name="width" placeholder="Ex. 14">
+          <label for="width">feet</label>
+      </fieldset>
+      <fieldset>
+          <label for="length">Length: </label>
+          <input id="length" type="text" name="length" placeholder="Ex. 14">
+          <label for="width">feet</label>
+      </fieldset>
+
+      <input type="submit" value="Next Step" />
+    </form>
+  </body>
+</html>
