@@ -19,9 +19,7 @@ class Project(models.Model):
     def location_sq_footage(self):
         return self.width * self.length
 
-    # @property
-    # def location_sq_footage(self):
-    #     return Project.objects.all().annotate(prod=F('width') * F('length'))
+
 
 
 
