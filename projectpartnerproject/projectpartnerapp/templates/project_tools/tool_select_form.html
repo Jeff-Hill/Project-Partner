@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>Step 2: Add Tools</h1>
+
+
+    <form action="{% url 'projectpartnerapp:project_tools' %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="project">Add to Project: </label>
+          <select id="project" type="text" name="project">
+                {% for project in all_projects %}
+                    <option value="{{ project.id }}">{{ project.name }}</option>
+                {% endfor %}
+          </select>
+      </fieldset>
+      <fieldset>
+          <h3>Select multiple tools</h3>
+          <label for="tool">Add Tools: </label>
+          <select id="tool" type="text" name="tool">
+                {% for tool in all_tools %}
+                    <option value="{{ tool.id }}">{{ tool.name }}</option>
+                {% endfor %}
+          </select>
+      </fieldset>
+      <input type="submit" value="Update Project" />
+      <h3>Don't have the tool in your inventory?</h3>
+      <input type="submit" value="Add New Tool"/>
+    </form>
+  </body>
+</html>
