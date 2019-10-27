@@ -19,8 +19,15 @@ urlpatterns = [
     url(r'^project/form$', project_form, name='project_form'),
 
     url(r'^owners$', owner_list, name='owners'),
+
     url(r'^materials$', material_list, name='materials'),
+
     url(r'^tools$', tool_list, name='tools'),
+    url(r'^new-tool/form$', new_tool_form, name='new_tool_form'),
+
+    url(r'^project-tools$', project_tool_list, name='project_tools'),
+    url(r'^project-tool/form$', project_tool_form, name='project_tool_form'),
+
 
 
 ]

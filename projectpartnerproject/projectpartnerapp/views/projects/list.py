@@ -59,12 +59,12 @@ def project_list(request):
             INSERT INTO projectpartnerapp_project
             (
                 name, description, location,
-                width, length, owner_id
+                width, length, owner_id, completed
             )
-            VALUES (?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
             (form_data['name'], form_data['description'],
             form_data['location'], form_data['width'], form_data['length'],
-            request.user.owner.id))
+            request.user.owner.id, form_data['completed']))
 
         return redirect(reverse('projectpartnerapp:projects'))

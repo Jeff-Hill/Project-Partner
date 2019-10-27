@@ -15,9 +15,9 @@
             <li>Manufacturer: {{ tool.manufacturer }}</li>
             <li>Description: {{tool.description}}</li>
             <li>Cost: ${{tool.cost}}</li>
-            {% if tool.own == 0 %}
+            {% if tool.own == "off" %}
             <li>Own this tool: No</li>
-            {% elif tool.own == 1 %}
+            {% elif tool.own == "on" %}
             <li>Own this tool: Yes</li>
             {% endif %}
             <br></br>

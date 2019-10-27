@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>Add Tool to Inventory</h1>
+
+
+    <form action="{% url 'projectpartnerapp:tools' %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="name">Tool Name: </label>
+          <input id="name" type="text" name="name" required>
+      </fieldset>
+      <fieldset>
+          <label for="manufacturer">Manufacturer: </label>
+          <input id="manufacturer" type="text" name="manufacturer">
+      </fieldset>
+      <fieldset>
+          <label for="description">Description: </label>
+          <input id="description" type="text" name="description">
+      </fieldset>
+      <fieldset>
+          <label for="cost">Cost: </label>
+          <input id="cost" type="number" name="cost">
+      </fieldset>
+      <fieldset>
+          <p>Own It?</p>
+          <label for="own"> Yes: </label>
+          <input id="own" type="checkbox" name="own" value="on">
+          <label for="own"> No: </label>
+          <input id="own" type="checkbox" name="own" value="off">
+
+      </fieldset>
+      {% comment %} <fieldset>
+          <label for="project">Add to Project: </label>
+          <select id="project" type="text" name="project">
+                {% for project in all_projects %}
+                    <option value="{{ project.id }}">{{ project.name }}</option>
+                {% endfor %}
+          </select>
+      </fieldset> {% endcomment %}
+
+      <input type="submit" value="Add Tools" />
+    </form>
+  </body>
+</html>
