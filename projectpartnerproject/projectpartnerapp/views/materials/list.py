@@ -1,5 +1,7 @@
 import sqlite3
 from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from projectpartnerapp.models import Material
 from ..connection import Connection
@@ -42,3 +44,23 @@ def material_list(request):
         }
 
         return render(request, template, context)
+
+    elif request.method == 'POST':
+        form_data = request.POST
+
+        with sqlite3.connect(Connection.db_path) as conn:
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            INSERT INTO projectpartnerapp_material
+            (
+                name, description, cost,
+                quantity, project_id
+            )
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (form_data['name'], form_data['description'],
+            form_data['cost'], form_data['quantity'],
+            request.project.id))
+
+        return redirect(reverse('projectpartnerapp:projects'))

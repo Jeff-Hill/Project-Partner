@@ -3,6 +3,7 @@ from .projects.list import project_list
 from .projects.form import project_form
 from .owners.list import owner_list
 from .materials.list import material_list
+from .materials.form import material_form
 from .tools.list import tool_list
 from .tools.new_tool_form import new_tool_form
 from .project_tools.project_tool_form import project_tool_form

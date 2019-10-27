@@ -20,8 +20,6 @@ def project_tool_list(request):
             )
             VALUES (?, ?)
             """,
-            (form_data['name'], form_data['manufacturer'],
-                form_data['description'], form_data['cost'],
-                form_data["own"]))
+            (request.project.id, request.tool.id))
 
-        return redirect(reverse('projectpartnerapp:tools'))
+        return redirect(reverse('projectpartnerapp:material_form'))

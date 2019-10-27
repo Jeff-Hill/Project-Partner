@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    {% comment %} <link href="css/jquery.multiselect.css" rel="stylesheet" type="text/css"> {% endcomment %}
     <title>Project Partner</title>
   </head>
   <body>
@@ -19,10 +20,10 @@
                 {% endfor %}
           </select>
       </fieldset>
+      <h3>Select multiple tools</h3>
       <fieldset>
-          <h3>Select multiple tools</h3>
           <label for="tool">Add Tools: </label>
-          <select id="tool" type="text" name="tool">
+          <select id="tool" type="text" name="multicheckbox[]" class="4colactive">
                 {% for tool in all_tools %}
                     <option value="{{ tool.id }}">{{ tool.name }}</option>
                 {% endfor %}
@@ -32,5 +33,13 @@
       <h3>Don't have the tool in your inventory?</h3>
       <input type="submit" value="Add New Tool"/>
     </form>
+  {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="js/multiselect-checkbox/jquery.multiselect.js"></script>
+  <script>
+  $('select[multiple]').multiselect({
+      columns: 2,
+      placeholder: 'Select options'
+  });
+  </script> {% endcomment %}
   </body>
 </html>

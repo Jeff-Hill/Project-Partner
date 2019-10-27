@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^owners$', owner_list, name='owners'),
 
     url(r'^materials$', material_list, name='materials'),
+    url(r'^material/form$', material_form, name='material_form'),
 
     url(r'^tools$', tool_list, name='tools'),
     url(r'^new-tool/form$', new_tool_form, name='new_tool_form'),
