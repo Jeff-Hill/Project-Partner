@@ -14,13 +14,16 @@
 
     <ul style="list-style-type:none">
     {% for project in all_projects %}
-
+          {% if project.completed == 0 %}
             <li>Project Name: {{ project.name }}</li>
             <li>Description: {{project.description}}</li>
             <li>Location: {{project.location}}</li>
             <li>Width: {{project.width}}</li>
             <li>Length: {{project.length}}</li>
             <li>Square Footage: {{project.width}} x {{project.length}} = {{project.location_sq_footage}}</li>
+            <li>Completed: {{project.completed}}</li>
+          {% endif %}
+          <br></br>
 
 
     {% endfor %}

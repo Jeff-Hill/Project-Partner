@@ -67,4 +67,4 @@ def project_list(request):
             form_data['location'], form_data['width'], form_data['length'],
             request.user.owner.id, form_data['completed']))
 
-        return redirect(reverse('projectpartnerapp:projects'))
+        return redirect(reverse('projectpartnerapp:project_tool_form'))

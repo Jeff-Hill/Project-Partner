@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>Step 3 of 3: Add Materials</h1>
+
+
+    <form action="{% url 'projectpartnerapp:materials' %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="project">Add to Project: </label>
+          <select id="project" type="text" name="project_id">
+                {% for project in all_projects %}
+                    <option value="{{ project.id }}">{{ project.name }}</option>
+                {% endfor %}
+          </select>
+      </fieldset>
+      <fieldset>
+          <label for="name">Material Name: </label>
+          <input id="name" type="text" name="name" placeholder="">
+
+          <label for="description">Description: </label>
+          <input id="description" type="text" name="description" placeholder="">
+
+          <label for="cost">Cost: </label>
+          <input id="cost" type="text" name="cost" placeholder="">
+
+          <label for="quantity">Quantity: </label>
+          <input id="quantity" type="text" name="quantity" placeholder="">
+      </fieldset>
+
+      <input type="submit" value="Finish Creating Project" />
+    </form>
+  </body>
+</html>

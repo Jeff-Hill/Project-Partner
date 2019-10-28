@@ -20,6 +20,11 @@
             <li>Width: {{project.width}}</li>
             <li>Length: {{project.length}}</li>
             <li>Square Footage: {{project.width}} x {{project.length}} = {{project.location_sq_footage}}</li>
+            {% if project.completed == 0 %}
+            <li>Project Completed: No</li>
+            {% elif project.completed == 1 %}
+            <li>Project Completed: Yes</li>
+            {% endif %}
             <br></br>
 
 
