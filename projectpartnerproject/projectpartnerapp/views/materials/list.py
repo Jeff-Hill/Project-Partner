@@ -47,6 +47,7 @@ def material_list(request):
 
     elif request.method == 'POST':
         form_data = request.POST
+        # print(form_data['project_id'])
 
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
@@ -61,6 +62,6 @@ def material_list(request):
             """,
             (form_data['name'], form_data['description'],
             form_data['cost'], form_data['quantity'],
-            request.project.id))
+            form_data['project_id']))
 
         return redirect(reverse('projectpartnerapp:projects'))

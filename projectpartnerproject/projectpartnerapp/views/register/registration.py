@@ -1,14 +1,11 @@
 import sqlite3
-from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from projectpartnerapp.models import Owner
-from ..connection import Connection
 
 
 @csrf_exempt
@@ -18,7 +15,13 @@ def register_user(request):
     Method arguments:
       request -- The full HTTP request object
     '''
-    if request.method == 'POST':
+    if request.method == "GET":
+        template = 'registration/registration.html'
+        # Nothing needs to be sent to the template--so an empty dictionary is being sent.
+
+        return render(request, template, {})
+
+    elif request.method == 'POST':
 
         form_data = request.POST
         # Create a new user by invoking the `create_user` helper method
@@ -31,11 +34,22 @@ def register_user(request):
             last_name=form_data['last_name']
         )
 
-        owner = Owner.objects.create(
-            user=new_user
-        )
+        authenticated_user = authenticate(username=form_data['username'], password=form_data['password'])
 
-        return redirect(reverse('projectpartnerapp:/'))
+        if authenticated_user is not None:
+            login(request=request, user=authenticated_user)
+            return redirect(reverse('projectpartnerapp:home'))
+
+        else:
+            # Bad login details were provided. So we can't log the user in.
+            print("Invalid login details: {}, {}".format('username', 'password'))
+            return HttpResponse("Invalid login details supplied.")
+
+        owner = Owner.objects.create(user=new_user)
+
+
+
+        # return redirect(reverse('projectpartnerapp:/'))
 
         # Commit the user to the database by saving it
         # owner.save()

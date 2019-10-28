@@ -9,17 +9,21 @@ from ..connection import Connection
 def project_tool_list(request):
     if request.method == 'POST':
         form_data = request.POST
+        tool_id = request.POST.getlist('multicheckbox[]')
+
 
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
 
-            db_cursor.execute("""
-            INSERT INTO projectpartnerapp_projecttool
-            (
-                project_id, tool_id
-            )
-            VALUES (?, ?)
-            """,
-            (request.project.id, request.tool.id))
+            for id in tool_id:
+                db_cursor.execute("""
+                INSERT INTO projectpartnerapp_projecttool
+                (
+                    project_id, tool_id
+                )
+                VALUES (?, ?)
+                """,
+                (form_data['project_id'], id,)
+                )
 
         return redirect(reverse('projectpartnerapp:material_form'))

@@ -13,7 +13,7 @@
       {% csrf_token %}
       <fieldset>
           <label for="project">Add to Project: </label>
-          <select id="project" type="text" name="project">
+          <select id="project" type="text" name="project_id">
                 {% for project in all_projects %}
                     <option value="{{ project.id }}">{{ project.name }}</option>
                 {% endfor %}
