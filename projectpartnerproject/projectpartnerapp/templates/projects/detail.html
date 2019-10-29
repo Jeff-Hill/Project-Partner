@@ -6,12 +6,42 @@
     <title>Project Partner</title>
   </head>
   <body>
-    <h1>{{ project.name }}</h1>
-    <h2>{{ project.description }}</h2>
+    <h3>Project Details:</h3>
+    <ul style="list-style-type:none">
 
-    <div>{{ project.location }}</div>
-    <div>{{project.width }}</div>
-    <div>{{project.length }}</div>
-    <div>{{project.completed }}</div>
+            <li>Name: {{ project.name }}</li>
+            <li>Description: {{project.description}}</li>
+            <li>Location: {{project.location}}</li>
+            <li>Width: {{project.width}}</li>
+            <li>Length: {{project.length}}</li>
+            <li>Square Footage: {{project.width}} x {{project.length}} =</li>
+            {% if project.completed == 0 %}
+            <li>Project Completed: No</li>
+            {% elif project.completed == 1 %}
+            <li>Project Completed: Yes</li>
+            {% endif %}
+    </ul>
+
+
+    <h3>Project Materials</h3>
+    <ul style="list-style-type:none">
+            {% for material in project.materials.all %}
+                <li>Material Name: {{material.name}}</li>
+
+            {% endfor %}
+    </ul>
+
+    <h3>Project Toolss</h3>
+    <ul style="list-style-type:none">
+            {% for project_tool in project.tool_list.all %}
+                <li>Tool Name: {{project_tool.tool.name}}</li>
+
+            {% endfor %}
+    </ul>
+
+
+
+
+
   </body>
 </html>
