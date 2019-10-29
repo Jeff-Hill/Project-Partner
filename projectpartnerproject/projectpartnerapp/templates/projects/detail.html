@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    <h1>{{ project.name }}</h1>
+    <h2>{{ project.description }}</h2>
+
+    <div>{{ project.location }}</div>
+    <div>{{project.width }}</div>
+    <div>{{project.length }}</div>
+    <div>{{project.completed }}</div>
+  </body>
+</html>
