@@ -60,8 +60,8 @@ def material_list(request):
             )
             VALUES (?, ?, ?, ?, ?)
             """,
-            (form_data['name'], form_data['description'],
-            form_data['cost'], form_data['quantity'],
+            (form_data['name'], form_data['description'] or None,
+            form_data['cost'] or None, form_data['quantity'] or None,
             form_data['project_id']))
 
-        return redirect(reverse('projectpartnerapp:projects'))
+        return redirect(reverse('projectpartnerapp:home'))

@@ -8,6 +8,7 @@ from .tools.list import tool_list
 from .tools.new_tool_form import new_tool_form
 from .project_tools.project_tool_form import project_tool_form
 from .project_tools.list import project_tool_list
+from .projects.details import project_details
 from .home import home
 from .register.registration import register_user
 from .register.registration_form import register_form

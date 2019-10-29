@@ -6,31 +6,42 @@
     <title>Project Partner</title>
   </head>
   <body>
-
-    <h1>Welcome to Your Home Project Partner</h1>
-
-    <h2>Your Open Projects</h2>
-    <button>Create New Project</button>
-
+    <h3>Project Details:</h3>
     <ul style="list-style-type:none">
-    {% for project in all_projects %}
-          {% if project.completed == 0 %}
-           <li> <a href="{% url 'projectpartnerapp:project' project.id %}">Project Name: {{ project.name }} </a></li>
+
+            <li>Name: {{ project.name }}</li>
             <li>Description: {{project.description}}</li>
             <li>Location: {{project.location}}</li>
             <li>Width: {{project.width}}</li>
             <li>Length: {{project.length}}</li>
-            <li>Square Footage: {{project.width}} x {{project.length}} = {{project.location_sq_footage}}</li>
+            <li>Square Footage: {{project.width}} x {{project.length}} =</li>
             {% if project.completed == 0 %}
             <li>Project Completed: No</li>
             {% elif project.completed == 1 %}
             <li>Project Completed: Yes</li>
             {% endif %}
-          {% endif %}
-          <br></br>
-
-
-    {% endfor %}
     </ul>
+
+
+    <h3>Project Materials</h3>
+    <ul style="list-style-type:none">
+            {% for material in project.materials.all %}
+                <li>Material Name: {{material.name}}</li>
+
+            {% endfor %}
+    </ul>
+
+    <h3>Project Toolss</h3>
+    <ul style="list-style-type:none">
+            {% for project_tool in project.tool_list.all %}
+                <li>Tool Name: {{project_tool.tool.name}}</li>
+
+            {% endfor %}
+    </ul>
+
+
+
+
+
   </body>
 </html>

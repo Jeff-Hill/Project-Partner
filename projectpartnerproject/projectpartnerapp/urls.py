@@ -1,4 +1,5 @@
 from django.conf.urls import url, include
+from django.urls import path
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 from .views import *
@@ -17,6 +18,8 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^projects$', project_list, name='projects'),
     url(r'^project/form$', project_form, name='project_form'),
+    path('projects/<int:project_id>/', project_details, name='project'),
+
 
     url(r'^owners$', owner_list, name='owners'),
 

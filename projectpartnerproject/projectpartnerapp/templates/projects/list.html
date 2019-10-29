@@ -13,8 +13,7 @@
 
     <ul style="list-style-type:none">
     {% for project in all_projects %}
-
-            <li>Project Name: {{ project.name }}</li>
+           <li> <a href="{% url 'projectpartnerapp:project' project.id %}">Project Name: {{ project.name }} </a></li>
             <li>Description: {{project.description}}</li>
             <li>Location: {{project.location}}</li>
             <li>Width: {{project.width}}</li>
