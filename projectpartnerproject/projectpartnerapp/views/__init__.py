@@ -1,11 +1,11 @@
 from .auth.logout import logout_user
-from .projects.list import project_list
-from .projects.form import project_form
 from .owners.list import owner_list
 from .materials.list import material_list
 from .materials.form import material_form
 from .tools.list import tool_list
 from .tools.new_tool_form import new_tool_form
+from .projects.list import project_list
+from .projects.form import project_form, project_edit_form
 from .project_tools.project_tool_form import project_tool_form
 from .project_tools.list import project_tool_list
 from .projects.details import project_details

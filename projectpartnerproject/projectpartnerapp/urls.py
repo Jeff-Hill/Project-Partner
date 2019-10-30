@@ -19,6 +19,8 @@ urlpatterns = [
     url(r'^projects$', project_list, name='projects'),
     url(r'^project/form$', project_form, name='project_form'),
     path('projects/<int:project_id>/', project_details, name='project'),
+    url(r'^projects/(?P<project_id>[0-9]+)/form$', project_edit_form, name='project_edit_form'),
+
 
 
     url(r'^owners$', owner_list, name='owners'),

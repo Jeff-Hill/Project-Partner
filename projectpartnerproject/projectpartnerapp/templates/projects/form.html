@@ -12,34 +12,48 @@
 
     <h1>Step 1 of 3</h1>
 
-
-    <form action="{% url 'projectpartnerapp:projects' %}" method="post">
+    {% if project.id is not None %}
+        <form action="{% url 'projectpartnerapp:project' project.id %}" method="post">
+    {% else %}
+      <form action="{% url 'projectpartnerapp:projects' %}" method="post">
+    {% endif %}
       {% csrf_token %}
       <fieldset>
           <label for="name">Project Name: </label>
-          <input id="name" type="text" name="name" placeholder="Name Your Project">
+          <input id="name" type="text" name="name" placeholder="Name Your Project" value="{{ project.name}}">
       </fieldset>
       <fieldset>
           <label for="description">Description: </label>
-          <input id="description" type="text" name="description" placeholder="Described Project">
+          <input id="description" type="text" name="description" placeholder="Described Project" value="{{ project.description }}">
       </fieldset>
       <fieldset>
           <label for="location">Location: </label>
-          <input id="location" type="text" name="location" placeholder="Area of Home">
+          <input id="location" type="text" name="location" placeholder="Area of Home" value="{{ project.location }}">
       </fieldset>
       <fieldset>
           <label for="width">Width: </label>
-          <input id="width" type="text" name="width" placeholder="Ex. 14">
+          <input id="width" type="text" name="width" placeholder="Ex. 14" value="{{ project.width }}">
           <label for="width">feet</label>
       </fieldset>
       <fieldset>
           <label for="length">Length: </label>
-          <input id="length" type="text" name="length" placeholder="Ex. 14">
+          <input id="length" type="text" name="length" placeholder="Ex. 14" value="{{ project.length }}">
           <label for="width">feet</label>
       </fieldset>
+      {% if project.id is not None %}
+      <fieldset>
+      <label for="completed">Completed: </label>
+      <input type="checkbox" name="completed" value="{{ project.completed }}">
+      </fieldset>
+      {% else %}
       <input type="hidden" name="completed" value="0">
-
+      {% endif %}
+      {% if project.id is not None %}
+            <input type="hidden" name="actual_method" value="PUT">
+            <input type="submit" value="Update" />
+      {% else %}
       <input type="submit" value="Next Step" />
+      {% endif %}
     </form>
     {% endblock %}
   </body>

@@ -74,3 +74,48 @@ def project_details(request, project_id, pk=None):
 
         return render(request, template, context)
 
+    elif request.method == 'POST':
+        form_data = request.POST
+
+        # Check if this POST is for editing a book
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                UPDATE projectpartnerapp_project
+                SET name = ?,
+                    description = ?,
+                    location = ?,
+                    width = ?,
+                    length = ?,
+                    completed = ?,
+                    owner_id = ?
+                WHERE id = ?
+                """,
+                (
+                    form_data['name'], form_data['description'],
+                    form_data['location'], form_data['width'],
+                    form_data["length"], form_data['completed'], request.user.owner.id, project_id,
+                ))
+
+            return redirect(reverse('projectpartnerapp:project'))
+
+        # Check if this POST is for deleting a book
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "DELETE"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                    DELETE FROM projectpartnerapp_project
+                    WHERE id = ?
+                """, (project_id,))
+
+            return redirect(reverse('projectpartnerapp:projects'))
+
