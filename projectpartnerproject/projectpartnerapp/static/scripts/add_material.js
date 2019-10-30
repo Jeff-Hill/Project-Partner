@@ -29,21 +29,11 @@ return false;
 
 function addMaterialFunction(){
 
-    // var r = document.createElement('fieldset');
     var y = document.createElement("INPUT");
     y.setAttribute("type", "text");
     y.setAttribute("placeholder", "material name");
     y.setAttribute("name", "name[]");
     y.setAttribute("id", "name[]");
-    var g = document.createElement("IMG");
-    // g.setAttribute("Material")
-    // g.setAttribute("src", "delete.png");
     increment();
-    // y.setAttribute("Name", "textelement_" + i);
-    // y.setAttribute("Name", "name");
-    // r.appendChild(y);
-    // g.setAttribute("onclick", "removeElement('myForm','id_" + i + "')");
-    // r.appendChild(g);
-    // r.setAttribute("id", "id_" + i);
     document.getElementById("myForm").appendChild(y);
 }
