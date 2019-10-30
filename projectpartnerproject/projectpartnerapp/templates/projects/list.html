@@ -11,12 +11,13 @@
     {% block content %}
 
 
-    <h2>Your Projects</h2>
+    <h2>All Your Projects</h2>
     <button><a href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
 
     <ul style="list-style-type:none">
     {% for project in all_projects %}
-           <li> <a href="{% url 'projectpartnerapp:project' project.id %}">Project Name: {{ project.name }} </a></li>
+      {% if project.owner_id == user.id%}
+           <li> Project Name: {{ project.name }}</li>
             <li>Description: {{project.description}}</li>
             <li>Location: {{project.location}}</li>
             <li>Width: {{project.width}}</li>
@@ -27,7 +28,10 @@
             {% elif project.completed == 1 %}
             <li>Project Completed: Yes</li>
             {% endif %}
+            <button> <a href="{% url 'projectpartnerapp:project' project.id %}">Details </a></button>
+
             <br></br>
+      {% endif %}
 
 
     {% endfor %}

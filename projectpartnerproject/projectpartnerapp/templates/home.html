@@ -9,15 +9,17 @@
   </head>
   <body>
     {% block content %}
-    <h1>Welcome to Your Home Project Partner</h1>
+    {% if request.user.is_authenticated %}
+      <h2>Welcome, {{ user.first_name }}. Thanks for logging in.</h2>
 
-    <h2>Your Open Projects</h2>
+    <h3>Your Open Projects</h3>
     <button><a href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
 
     <ul style="list-style-type:none">
     {% for project in all_projects %}
+      {% if project.owner_id == user.id%}
           {% if project.completed == 0 %}
-           <li> <a href="{% url 'projectpartnerapp:project' project.id %}">Project Name: {{ project.name }} </a></li>
+           <li> Project Name: {{ project.name }}</li>
             <li>Description: {{project.description}}</li>
             <li>Location: {{project.location}}</li>
             <li>Width: {{project.width}}</li>
@@ -28,12 +30,18 @@
             {% elif project.completed == 1 %}
             <li>Project Completed: Yes</li>
             {% endif %}
+            <button> <a href="{% url 'projectpartnerapp:project' project.id %}">Details </a></button>
+
           {% endif %}
           <br></br>
+      {% endif %}
 
 
     {% endfor %}
     </ul>
+      {% else %}
+          <h2>Welcome, new user. Please Login or Register.</h2>
+    {% endif %}
     {% endblock %}
   </body>
 </html>

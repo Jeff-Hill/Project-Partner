@@ -37,10 +37,11 @@
       </fieldset>
 
 
-      <input type="submit" value="Update Project" />
-      <h3>Don't have the tool in your inventory?</h3>
-      <input type="submit" value="Add New Tool"/>
+      <input type="submit" value="Final Step" />
     </form>
+      <h3>Don't have the tool in your inventory?</h3>
+      <button> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="{% static 'scripts/multiselect.js' %}"></script>
   <script>
