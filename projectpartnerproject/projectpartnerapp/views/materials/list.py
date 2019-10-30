@@ -47,21 +47,21 @@ def material_list(request):
 
     elif request.method == 'POST':
         form_data = request.POST
-        # print(form_data['project_id'])
+        list_materials = request.POST.getlist('name[]')
+
 
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
 
-            db_cursor.execute("""
-            INSERT INTO projectpartnerapp_material
-            (
-                name, description, cost,
-                quantity, project_id
-            )
-            VALUES (?, ?, ?, ?, ?)
-            """,
-            (form_data['name'], form_data['description'] or None,
-            form_data['cost'] or None, form_data['quantity'] or None,
-            form_data['project_id']))
+            for material in list_materials:
+                db_cursor.execute("""
+                INSERT INTO projectpartnerapp_material
+                (
+                    name, project_id
+                )
+                VALUES (?, ?)
+                """,
+                (material,
+                form_data['project_id']))
 
         return redirect(reverse('projectpartnerapp:home'))

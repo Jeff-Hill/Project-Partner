@@ -15,30 +15,24 @@
 
     <form action="{% url 'projectpartnerapp:materials' %}" method="post">
       {% csrf_token %}
+      <label for="project">Add to Project: </label>
       <fieldset>
-          <label for="project">Add to Project: </label>
           <select id="project" type="text" name="project_id">
+            {% comment %} {% if project.owner_id == user.id%} {% endcomment %}
                 {% for project in all_projects %}
                     <option value="{{ project.id }}">{{ project.name }}</option>
                 {% endfor %}
+            {% comment %} {% endif %} {% endcomment %}
           </select>
       </fieldset>
-      <fieldset>
-          <label for="name">Material Name: </label>
-          <input id="name" type="text" name="name" placeholder="">
-
-          <label for="description">Description: </label>
-          <input id="description" type="text" name="description" placeholder="">
-
-          <label for="cost">Cost: </label>
-          <input id="cost" type="text" name="cost" placeholder="">
-
-          <label for="quantity">Quantity: </label>
-          <input id="quantity" type="text" name="quantity" placeholder="">
+      <label for="name">Materials</label>
+      <fieldset id="myForm" name="name[]">
+          <input id="name[]" type="text" name="name[]" placeholder="material name">
       </fieldset>
-
       <input type="submit" value="Finish Creating Project" />
     </form>
+      <button onclick="addMaterialFunction()">Add Material</button>
+    <script src="{% static 'scripts/add_material.js' %}"></script>
     {% endblock %}
   </body>
 </html>
