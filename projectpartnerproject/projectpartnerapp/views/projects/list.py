@@ -25,6 +25,7 @@ def project_list(request):
                 p.owner_id,
                 p.completed
             from projectpartnerapp_project p
+            where p.owner_id = ?
             """,(user.id,))
 
             all_projects = []
