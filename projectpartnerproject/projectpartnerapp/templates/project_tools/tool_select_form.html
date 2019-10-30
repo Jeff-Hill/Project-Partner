@@ -28,7 +28,6 @@
 
       <fieldset>
           <label for="tool_id">Add Tools: </label>
-          {% comment %} <select id="tool" type="text" name="tool_id"> {% endcomment %}
           <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
           {% for tool in all_tools %}
                     <option value="{{ tool.id }}">{{ tool.name }}</option>
