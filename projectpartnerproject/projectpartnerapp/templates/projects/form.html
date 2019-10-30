@@ -1,3 +1,5 @@
+{% extends 'shared/base.html' %}
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +8,8 @@
     <title>Project Partner</title>
   </head>
   <body>
+    {% block content %}
+
     <h1>Step 1 of 3</h1>
 
 
@@ -37,5 +41,6 @@
 
       <input type="submit" value="Next Step" />
     </form>
+    {% endblock %}
   </body>
 </html>

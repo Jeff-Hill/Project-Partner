@@ -1,3 +1,5 @@
+{% extends 'shared/base.html' %}
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +8,8 @@
     <title>Project Partner</title>
   </head>
   <body>
+    {% block content %}
+
     <h3>Project Details:</h3>
     <ul style="list-style-type:none">
 
@@ -42,6 +46,7 @@
 
 
 
+    {% endblock %}
 
   </body>
 </html>
