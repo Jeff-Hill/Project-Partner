@@ -10,6 +10,7 @@ from ..connection import Connection
 def project_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
+            user = request.user
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
@@ -24,7 +25,7 @@ def project_list(request):
                 p.owner_id,
                 p.completed
             from projectpartnerapp_project p
-            """)
+            """,(user.id,))
 
             all_projects = []
             dataset = db_cursor.fetchall()

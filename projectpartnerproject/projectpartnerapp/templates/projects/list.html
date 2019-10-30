@@ -16,6 +16,7 @@
 
     <ul style="list-style-type:none">
     {% for project in all_projects %}
+      {% if project.owner_id == user.id%}
            <li> <a href="{% url 'projectpartnerapp:project' project.id %}">Project Name: {{ project.name }} </a></li>
             <li>Description: {{project.description}}</li>
             <li>Location: {{project.location}}</li>
@@ -28,6 +29,7 @@
             <li>Project Completed: Yes</li>
             {% endif %}
             <br></br>
+      {% endif %}
 
 
     {% endfor %}

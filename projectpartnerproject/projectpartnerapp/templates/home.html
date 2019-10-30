@@ -9,9 +9,10 @@
   </head>
   <body>
     {% block content %}
-    <h1>Welcome to Your Home Project Partner</h1>
+    {% if request.user.is_authenticated %}
+      <h2>Welcome, {{ user.first_name }}. Thanks for logging in.</h2>
 
-    <h2>Your Open Projects</h2>
+    <h3>Your Open Projects</h3>
     <button><a href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
 
     <ul style="list-style-type:none">
@@ -34,6 +35,9 @@
 
     {% endfor %}
     </ul>
+      {% else %}
+          <h2>Welcome, new user. Please Login or Register.</h2>
+    {% endif %}
     {% endblock %}
   </body>
 </html>
