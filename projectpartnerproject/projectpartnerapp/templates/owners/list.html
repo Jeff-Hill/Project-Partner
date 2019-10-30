@@ -1,3 +1,5 @@
+{% extends 'shared/base.html' %}
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +8,8 @@
     <title>Project Partner Owners</title>
   </head>
   <body>
+    {% block content %}
+
     <h1>Owners</h1>
 
     <ol>
@@ -13,5 +17,6 @@
         <li>{{ owner.first_name }} {{ owner.last_name }}</li>
     {% endfor %}
     </ol>
+    {% endblock %}
   </body>
 </html>

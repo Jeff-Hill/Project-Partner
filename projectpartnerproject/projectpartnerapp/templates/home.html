@@ -1,3 +1,5 @@
+{% extends 'shared/base.html' %}
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -6,11 +8,11 @@
     <title>Project Partner</title>
   </head>
   <body>
-
+    {% block content %}
     <h1>Welcome to Your Home Project Partner</h1>
 
     <h2>Your Open Projects</h2>
-    <button>Create New Project</button>
+    <button><a href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
 
     <ul style="list-style-type:none">
     {% for project in all_projects %}
@@ -32,5 +34,6 @@
 
     {% endfor %}
     </ul>
+    {% endblock %}
   </body>
 </html>

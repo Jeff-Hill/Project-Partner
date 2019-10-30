@@ -1,3 +1,5 @@
+{% extends 'shared/base.html' %}
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -6,6 +8,7 @@
     <title>Project Partner</title>
   </head>
   <body>
+    {% block content %}
     <h1>Add Tool to Inventory</h1>
 
 
@@ -46,5 +49,6 @@
 
       <input type="submit" value="Add Tools" />
     </form>
+    {% endblock %}
   </body>
 </html>
