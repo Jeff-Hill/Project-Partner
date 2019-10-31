@@ -2,6 +2,7 @@ import sqlite3
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .details import get_project
+from projectpartnerapp.models import Project
 from ..connection import Connection
 
 
@@ -37,16 +38,14 @@ def project_form(request):
         return render(request, template, context)
 
 @login_required
-def project_edit_form(request, project_id):
+def project_edit_form(request, project_id, pk=None):
 
     if request.method == 'GET':
-        project = get_project(project_id)
-        # libraries = get_libraries()
+        project = Project.objects.get(pk=project_id)
 
-        template = 'projects/form.html'
+        template = 'projects/project_edit_form.html'
         context = {
             'project': project,
-            # 'all_projects': libraries
         }
 
         return render(request, template, context)

@@ -1,7 +1,8 @@
 from .auth.logout import logout_user
 from .owners.list import owner_list
 from .materials.list import material_list
-from .materials.form import material_form
+from .materials.details import material_details
+from .materials.form import material_form, material_edit_form
 from .tools.list import tool_list
 from .tools.new_tool_form import new_tool_form
 from .projects.list import project_list

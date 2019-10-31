@@ -1,0 +1,48 @@
+{% extends 'shared/base.html' %}
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    {% block content %}
+
+    <h1>Edit Project Material</h1>
+
+
+    <form action="{% url 'projectpartnerapp:material'  material_id%}" method="post">
+    {% comment %} <form action="{% url 'projectpartnerapp:materials' %}" method="post"> {% endcomment %}
+
+      {% csrf_token %}
+      <input type="hidden" name="project_id" value="{{material.project_id}}">
+      {% comment %} <input type="hidden" name="material_id" value="{{material.id}}"> {% endcomment %}
+
+      <fieldset>
+          <label for="name">Material Name: </label>
+          <input id="name" type="text" name="name" placeholder="" value="{{ material.name }}">
+      </fieldset>
+      <fieldset>
+          <label for="description">Description: </label>
+          <input id="description" type="text" name="description" placeholder="" value="{{ material.description }}">
+      </fieldset>
+      <fieldset>
+          <label for="cost">Cost: </label>
+          <input id="cost" type="text" name="cost" placeholder="" value="{{ material.cost }}">
+      </fieldset>
+      <fieldset>
+          <label for="quantity">Quantity: </label>
+          <input id="quantity" type="text" name="quantity" placeholder="" value="{{ material.quantity }}">
+          <label for="quantity">feet</label>
+      </fieldset>
+      <input type="hidden" name="actual_method" value="PUT">
+      <input type="submit" value="Update" />
+
+
+    </form>
+
+    {% endblock %}
+  </body>
+</html>

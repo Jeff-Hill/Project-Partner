@@ -1,46 +1,38 @@
 import sqlite3
-from django.shortcuts import render
 from django.urls import reverse
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from projectpartnerapp.models import Material
 from ..connection import Connection
 
-@login_required
-def material_list(request):
-    if request.method == 'GET':
+
+
+def get_material(material_id):
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            select
-                m.id,
-                m.project_id,
+            SELECT
+                m.id material_id,
                 m.name,
                 m.description,
                 m.cost,
-                m.quantity
-            from projectpartnerapp_material m
-            """)
+                m.quantity,
+                m.project_id
+            FROM projectpartnerapp_material m
+            WHERE m.id = ?
 
-            all_materials = []
-            dataset = db_cursor.fetchall()
+            """, (material_id,))
 
-            for row in dataset:
-                material = Material()
-                material.id = row['id']
-                material.name = row['name']
-                material.description = row['description']
-                material.cost = row['cost']
-                material.quantity = row['quantity']
-                material.project_id = row['project_id']
+        return db_cursor.fetchone()
 
-                all_materials.append(material)
-
-        template = 'materials/list.html'
+@login_required
+def material_details(request, material_id):
+    if request.method == 'GET':
+        material = get_material(material_id)
+        template = 'materials/detail.html'
         context = {
-            'all_materials': all_materials
+            'material': material
         }
 
         return render(request, template, context)
@@ -67,12 +59,12 @@ def material_list(request):
                 (
                     form_data['name'], form_data['description'],
                     form_data['cost'], form_data['quantity'],
-                    form_data['project_id'], form_data['material_id']
+                    form_data['project_id'], material_id
                 ))
 
-            return redirect(reverse('projectpartnerapp:material'))
+            return redirect(reverse('projectpartnerapp:projects'))
 
-        elif (
+        if (
             "actual_method" in form_data
             and form_data["actual_method"] == "DELETE"
         ):
@@ -86,22 +78,3 @@ def material_list(request):
 
             return redirect(reverse('projectpartnerapp:materials'))
 
-        else:
-            list_materials = request.POST.getlist('name[]')
-
-
-        with sqlite3.connect(Connection.db_path) as conn:
-            db_cursor = conn.cursor()
-
-            for material in list_materials:
-                db_cursor.execute("""
-                INSERT INTO projectpartnerapp_material
-                (
-                    name, project_id
-                )
-                VALUES (?, ?)
-                """,
-                (material,
-                form_data['project_id']))
-
-        return redirect(reverse('projectpartnerapp:home'))

@@ -5,7 +5,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Project Partner Materials</title>
+    <title>Project Partner</title>
   </head>
   <body>
     {% block content %}
@@ -23,7 +23,7 @@
             <br></br>
     {% endfor %}
     </ul>
-    {% comment %} <form action="{% url 'projectpartnerapp:material' material.id %}" method="POST">
+    <form action="{% url 'projectpartnerapp:material' material.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
             <button>Delete Material</button>
@@ -32,8 +32,11 @@
     <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
             {% csrf_token %}
             <button>Edit Material</button>
-    </form> {% endcomment %}
+    </form>
+
+
 
     {% endblock %}
+
   </body>
 </html>
