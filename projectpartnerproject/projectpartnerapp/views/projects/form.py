@@ -2,6 +2,7 @@ import sqlite3
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .details import get_project
+from ..tools.new_tool_form import get_tools
 from projectpartnerapp.models import Project
 from ..connection import Connection
 
@@ -42,10 +43,12 @@ def project_edit_form(request, project_id, pk=None):
 
     if request.method == 'GET':
         project = Project.objects.get(pk=project_id)
+        tools = get_tools()
 
         template = 'projects/project_edit_form.html'
         context = {
             'project': project,
+            'all_tools': tools
         }
 
         return render(request, template, context)

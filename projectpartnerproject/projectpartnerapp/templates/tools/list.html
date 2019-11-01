@@ -10,6 +10,7 @@
   <body>
     {% block content %}
     <h1>Tools in Inventory</h1>
+    <button> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
 
     <ul style="list-style-type:none">
     {% for tool in all_tools %}

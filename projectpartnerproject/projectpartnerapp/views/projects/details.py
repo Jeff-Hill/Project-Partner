@@ -76,6 +76,7 @@ def project_details(request, project_id, pk=None):
 
     elif request.method == 'POST':
         form_data = request.POST
+        tool_id = request.POST.getlist('multicheckbox[]')
 
         if (
             "actual_method" in form_data
@@ -98,12 +99,26 @@ def project_details(request, project_id, pk=None):
                 (
                     form_data['name'], form_data['description'],
                     form_data['location'], form_data['width'],
-                    form_data["length"], form_data['completed'], request.user.owner.id, project_id,
+                    form_data['length'], form_data['completed'], request.user.owner.id, form_data['project_id'],
                 ))
 
-            return redirect(reverse('projectpartnerapp:project'))
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
 
-        # Check if this POST is for deleting a book
+
+                for id in tool_id:
+                    db_cursor.execute("""
+                    INSERT INTO projectpartnerapp_projecttool
+                    (
+                        project_id, tool_id
+                    )
+                    VALUES (?, ?)
+                    """,
+                    (form_data['project_id'], id,)
+                    )
+
+            return redirect(reverse('projectpartnerapp:projects'))
+
         if (
             "actual_method" in form_data
             and form_data["actual_method"] == "DELETE"

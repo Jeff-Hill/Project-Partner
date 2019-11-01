@@ -38,14 +38,6 @@
           <input id="own" type="checkbox" name="own" value="off">
 
       </fieldset>
-      {% comment %} <fieldset>
-          <label for="project">Add to Project: </label>
-          <select id="project" type="text" name="project">
-                {% for project in all_projects %}
-                    <option value="{{ project.id }}">{{ project.name }}</option>
-                {% endfor %}
-          </select>
-      </fieldset> {% endcomment %}
 
       <input type="submit" value="Add Tools" />
     </form>
