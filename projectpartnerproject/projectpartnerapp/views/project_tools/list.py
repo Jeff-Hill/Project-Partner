@@ -27,3 +27,17 @@ def project_tool_list(request):
                 )
 
         return redirect(reverse('projectpartnerapp:material_form'))
+
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "DELETE"
+            ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                DELETE FROM projectpartnerapp_projecttool
+                WHERE id = ?
+                """, (projecttool_id,))
+
+            return redirect(reverse('libraryapp:books'))
