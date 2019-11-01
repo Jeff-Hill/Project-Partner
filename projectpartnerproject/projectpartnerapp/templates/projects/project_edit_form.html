@@ -13,12 +13,13 @@
 
     <h1>Edit Your Project</h1>
 
-    {% if project.id is not None %}
-        <form action="{% url 'projectpartnerapp:project' project.id %}" method="post">
-    {% else %}
+    {% comment %} {% if project.id is not None %} {% endcomment %}
+    <form action="{% url 'projectpartnerapp:project' project.id %}" method="post">
+    {% comment %} {% else %}
       <form action="{% url 'projectpartnerapp:projects' %}" method="post">
-    {% endif %}
+    {% endif %} {% endcomment %}
       {% csrf_token %}
+      <input type="hidden" name="project_id" value="{{project.id}}">
       <fieldset>
           <label for="name">Project Name: </label>
           <input id="name" type="text" name="name" placeholder="Name Your Project" value="{{ project.name}}">
@@ -41,19 +42,51 @@
           <input id="length" type="text" name="length" placeholder="Ex. 14" value="{{ project.length }}">
           <label for="width">feet</label>
       </fieldset>
-      {% if project.id is not None %}
-      <fieldset>
+      {% comment %} {% if project.id is not None %} {% endcomment %}
+      {% comment %} <fieldset>
       <label for="completed">Completed: </label>
       <input type="checkbox" name="completed" value="{{ project.completed }}">
-      </fieldset>
-      {% else %}
+      </fieldset> {% endcomment %}
+      {% comment %} {% else %}
       <input type="hidden" name="completed" value="0">
-      {% endif %}
-      </form>
+      {% endif %} {% endcomment %}
 
-      <h3>Your Project Materials</h3>
+      <fieldset>
+          <p>Mark Project Complete</p>
+          <label for="completed"> Yes: </label>
+          <input id="completed" type="checkbox" name="completed" value=1>
+          <label for="completed"> No: </label>
+          <input id="completed" type="checkbox" name="completed" value=0>
 
-      {% for material in project.materials.all %}
+      </fieldset>
+
+      <h3>Project Tools</h3>
+        <ul style="list-style-type:none">
+                {% for project_tool in project.tool_list.all %}
+                    <li>Tool Name: {{project_tool.tool.name}}</li>
+
+                {% endfor %}
+        </ul>
+
+        <fieldset>
+            <label for="tool_id">Add Tools: </label>
+            <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
+            {% for tool in all_tools %}
+                      <option value="{{ tool.id }}">{{ tool.name }}</option>
+                  {% endfor %}
+            </select>
+        </fieldset>
+      {% comment %} {% if project.id is not None %} {% endcomment %}
+      <input type="hidden" name="actual_method" value="PUT">
+      <input type="submit" value="Update" />
+      {% comment %} {% else %}
+      <input type="submit" value="Next Step" />
+      {% endif %} {% endcomment %}
+    </form>
+
+    <h3>Your Project Materials</h3>
+
+          {% for material in project.materials.all %}
 
             <li>Material Name: {{ material.name }}</li>
             <li>Description: {{material.description}}</li>
@@ -67,25 +100,9 @@
             <button><a href="{% url 'projectpartnerapp:material_form' %}">Add New Material</a></button>
 
             <br></br>
-      {% endfor %}
+          {% endfor %}
 
-      <h3>Edit Tool Selection</h3>
 
-      <fieldset>
-          <label for="tool_id">Add Tools: </label>
-          <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
-          {% for project_tool in project.tool_list.all %}
-                    <option value="{{ project_tool.tool.id }}">{{ project_tool.tool.name }}</option>
-                {% endfor %}
-          </select>
-      </fieldset>
-      {% if project.id is not None %}
-            <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" />
-      {% else %}
-      <input type="submit" value="Next Step" />
-      {% endif %}
-    </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="{% static 'scripts/multiselect.js' %}"></script>

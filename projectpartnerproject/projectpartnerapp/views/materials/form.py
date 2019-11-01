@@ -30,9 +30,11 @@ def get_materials():
 def material_form(request):
     if request.method == 'GET':
         materials = get_materials()
+        projects = get_projects()
         template = 'materials/form.html'
         context = {
-            'all_materials': materials
+            'all_materials': materials,
+            'all_projects': projects
         }
 
         return render(request, template, context)

@@ -35,18 +35,17 @@
             {% endfor %}
     </ul>
 
-    <h3>Project Toolss</h3>
+    <h3>Project Tools</h3>
     <ul style="list-style-type:none">
             {% for project_tool in project.tool_list.all %}
                 <li>Tool Name: {{project_tool.tool.name}}</li>
 
             {% endfor %}
     </ul>
-      <label for="complete_project">Complete Project </label>
-      <input id="complete_project" type="checkbox" name="complete_project">
+
      <form action="{% url 'projectpartnerapp:project_edit_form' project.id %}" method="GET">
             {% csrf_token %}
-            <button>Edit</button>
+            <button>Edit Project</button>
       </form>
 
 
