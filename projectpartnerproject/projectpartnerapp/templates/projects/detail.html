@@ -42,9 +42,9 @@
 
             {% endfor %}
     </ul>
-      <label for="complete-project">Complete Project </label>
-      <input id="complete-project" type="checkbox" name="name">
-      <form action="{% url 'projectpartnerapp:project_edit_form' project.id %}" method="GET">
+      <label for="complete_project">Complete Project </label>
+      <input id="complete_project" type="checkbox" name="complete_project">
+     <form action="{% url 'projectpartnerapp:project_edit_form' project.id %}" method="GET">
             {% csrf_token %}
             <button>Edit</button>
       </form>

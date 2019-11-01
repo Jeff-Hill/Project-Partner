@@ -14,11 +14,9 @@
 
 
     <form action="{% url 'projectpartnerapp:material'  material_id%}" method="post">
-    {% comment %} <form action="{% url 'projectpartnerapp:materials' %}" method="post"> {% endcomment %}
 
       {% csrf_token %}
       <input type="hidden" name="project_id" value="{{material.project_id}}">
-      {% comment %} <input type="hidden" name="material_id" value="{{material.id}}"> {% endcomment %}
 
       <fieldset>
           <label for="name">Material Name: </label>

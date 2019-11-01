@@ -23,13 +23,13 @@
             <br></br>
     {% endfor %}
     </ul>
-    <form action="{% url 'projectpartnerapp:material' material.id %}" method="POST">
+    <form action="{% url 'projectpartnerapp:material' material.material_id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
             <button>Delete Material</button>
     </form>
 
-    <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
+    <form action="{% url 'projectpartnerapp:material_edit_form' material.material_id %}" method="GET">
             {% csrf_token %}
             <button>Edit Material</button>
     </form>

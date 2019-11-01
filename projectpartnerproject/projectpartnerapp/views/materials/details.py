@@ -57,8 +57,8 @@ def material_details(request, material_id):
                 WHERE id = ?
                 """,
                 (
-                    form_data['name'], form_data['description'],
-                    form_data['cost'], form_data['quantity'],
+                    form_data['name'] or None, form_data['description'] or None,
+                    form_data['cost'] or None, form_data['quantity'] or None,
                     form_data['project_id'], material_id
                 ))
 

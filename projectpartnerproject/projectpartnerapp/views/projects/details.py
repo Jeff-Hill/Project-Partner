@@ -77,7 +77,6 @@ def project_details(request, project_id, pk=None):
     elif request.method == 'POST':
         form_data = request.POST
 
-        # Check if this POST is for editing a book
         if (
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
