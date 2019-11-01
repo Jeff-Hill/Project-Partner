@@ -5,12 +5,13 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="{% static 'styles/multiselect.css' %}" rel="stylesheet" type="text/css">
     <title>Project Partner</title>
   </head>
   <body>
     {% block content %}
 
-    <h1>Step 1 of 3</h1>
+    <h1>Edit Your Project</h1>
 
     {% if project.id is not None %}
         <form action="{% url 'projectpartnerapp:project' project.id %}" method="post">
@@ -38,7 +39,7 @@
       <fieldset>
           <label for="length">Length: </label>
           <input id="length" type="text" name="length" placeholder="Ex. 14" value="{{ project.length }}">
-          <label for="length">feet</label>
+          <label for="width">feet</label>
       </fieldset>
       {% if project.id is not None %}
       <fieldset>
@@ -48,6 +49,36 @@
       {% else %}
       <input type="hidden" name="completed" value="0">
       {% endif %}
+      </form>
+
+      <h3>Your Project Materials</h3>
+
+      {% for material in project.materials.all %}
+
+            <li>Material Name: {{ material.name }}</li>
+            <li>Description: {{material.description}}</li>
+            <li>Cost: {{material.cost}}</li>
+            <li>Quantity: {{material.quantity}}</li>
+            <li>Project: {{material.project_id}}</li>
+            <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit Material Details</button>
+            </form>
+            <button><a href="{% url 'projectpartnerapp:material_form' %}">Add New Material</a></button>
+
+            <br></br>
+      {% endfor %}
+
+      <h3>Edit Tool Selection</h3>
+
+      <fieldset>
+          <label for="tool_id">Add Tools: </label>
+          <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
+          {% for project_tool in project.tool_list.all %}
+                    <option value="{{ project_tool.tool.id }}">{{ project_tool.tool.name }}</option>
+                {% endfor %}
+          </select>
+      </fieldset>
       {% if project.id is not None %}
             <input type="hidden" name="actual_method" value="PUT">
             <input type="submit" value="Update" />
@@ -55,6 +86,15 @@
       <input type="submit" value="Next Step" />
       {% endif %}
     </form>
-    {% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="{% static 'scripts/multiselect.js' %}"></script>
+    <script>
+    $('select[multiple]').multiselect({
+        columns: 2,
+        placeholder: 'Select options'
+    });
+    </script>
+  {% endblock %}
   </body>
 </html>

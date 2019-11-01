@@ -1,54 +1,38 @@
 import sqlite3
-from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .details import get_material
-from ..projects.form import get_projects
 from ..connection import Connection
 
 
-def get_materials():
-    with sqlite3.connect(Connection.db_path) as conn:
 
-        conn.row_factory = sqlite3.Row
-        db_cursor = conn.cursor()
+def get_material(material_id):
+        with sqlite3.connect(Connection.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            db_cursor = conn.cursor()
 
-        db_cursor.execute("""
-        select
-            m.id,
-            m.name,
-            m.description,
-            m.cost,
-            m.quantity,
-            m.project_id
-        from projectpartnerapp_material m
-        """)
+            db_cursor.execute("""
+            SELECT
+                m.id material_id,
+                m.name,
+                m.description,
+                m.cost,
+                m.quantity,
+                m.project_id
+            FROM projectpartnerapp_material m
+            WHERE m.id = ?
 
-        return db_cursor.fetchall()
+            """, (material_id,))
 
-@login_required
-def material_form(request):
-    if request.method == 'GET':
-        materials = get_materials()
-        template = 'materials/form.html'
-        context = {
-            'all_materials': materials
-        }
-
-        return render(request, template, context)
+        return db_cursor.fetchone()
 
 @login_required
-def material_edit_form(request, material_id):
-
+def material_details(request, material_id):
     if request.method == 'GET':
         material = get_material(material_id)
-        projects = get_projects()
-
-        template = 'materials/material_edit_form.html'
+        template = 'materials/detail.html'
         context = {
-            'material': material,
-            'all_projects': projects,
-            "material_id": material_id
+            'material': material
         }
 
         return render(request, template, context)
@@ -56,7 +40,6 @@ def material_edit_form(request, material_id):
     elif request.method == 'POST':
         form_data = request.POST
 
-        # Check if this POST is for editing a book
         if (
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
@@ -74,12 +57,12 @@ def material_edit_form(request, material_id):
                 WHERE id = ?
                 """,
                 (
-                    form_data['name'], form_data['description'],
-                    form_data['cost'], form_data['quantity'],
+                    form_data['name'] or None, form_data['description'] or None,
+                    form_data['cost'] or None, form_data['quantity'] or None,
                     form_data['project_id'], material_id
                 ))
 
-            return redirect(reverse('projectpartnerapp:material'))
+            return redirect(reverse('projectpartnerapp:projects'))
 
         if (
             "actual_method" in form_data
@@ -94,3 +77,4 @@ def material_edit_form(request, material_id):
                 """, (material_id,))
 
             return redirect(reverse('projectpartnerapp:materials'))
+

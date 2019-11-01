@@ -16,9 +16,9 @@
             <li>Name: {{ project.name }}</li>
             <li>Description: {{project.description}}</li>
             <li>Location: {{project.location}}</li>
-            <li>Width: {{project.width}}</li>
-            <li>Length: {{project.length}}</li>
-            <li>Square Footage: {{project.width}} x {{project.length}} =</li>
+            <li>Width: {{project.width}} ft.</li>
+            <li>Length: {{project.length}} ft.</li>
+            <li>Square Footage: {{project.location_sq_footage}} ft.</li>
             {% if project.completed == 0 %}
             <li>Project Completed: No</li>
             {% elif project.completed == 1 %}
@@ -42,6 +42,12 @@
 
             {% endfor %}
     </ul>
+      <label for="complete_project">Complete Project </label>
+      <input id="complete_project" type="checkbox" name="complete_project">
+     <form action="{% url 'projectpartnerapp:project_edit_form' project.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+      </form>
 
 
 

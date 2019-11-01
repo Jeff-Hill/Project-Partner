@@ -20,9 +20,11 @@
            <li> Project Name: {{ project.name }}</li>
             <li>Description: {{project.description}}</li>
             <li>Location: {{project.location}}</li>
-            <li>Width: {{project.width}}</li>
-            <li>Length: {{project.length}}</li>
-            <li>Square Footage: {{project.width}} x {{project.length}} = {{project.location_sq_footage}}</li>
+            <li>Width: {{project.width}} ft.</li>
+            <li>Length: {{project.length}} ft.</li>
+            <li>Square Footage: {{project.location_sq_footage}} ft.</li>
+            <label for="complete-project">Complete Project </label>
+            <input id="complete-project" type="checkbox" name="name">
             {% if project.completed == 0 %}
             <li>Project Completed: No</li>
             {% elif project.completed == 1 %}
