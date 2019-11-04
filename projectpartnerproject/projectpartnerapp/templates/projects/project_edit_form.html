@@ -7,91 +7,99 @@
     <meta charset="utf-8">
     <link href="{% static 'styles/multiselect.css' %}" rel="stylesheet" type="text/css">
     <title>Project Partner</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
+  <div class="projects">
+    <div class="edit">
+        <h1 class="project__title"><strong>Edit Project</strong></h1>
 
-    <h1>Edit Your Project</h1>
+        <form action="{% url 'projectpartnerapp:project' project.id %}" method="post">
 
-    {% comment %} {% if project.id is not None %} {% endcomment %}
-    <form action="{% url 'projectpartnerapp:project' project.id %}" method="post">
-    {% comment %} {% else %}
-      <form action="{% url 'projectpartnerapp:projects' %}" method="post">
-    {% endif %} {% endcomment %}
-      {% csrf_token %}
-      <input type="hidden" name="project_id" value="{{project.id}}">
-      <fieldset>
-          <label for="name">Project Name: </label>
-          <input id="name" type="text" name="name" placeholder="Name Your Project" value="{{ project.name}}">
-      </fieldset>
-      <fieldset>
-          <label for="description">Description: </label>
-          <input id="description" type="text" name="description" placeholder="Described Project" value="{{ project.description }}">
-      </fieldset>
-      <fieldset>
-          <label for="location">Location: </label>
-          <input id="location" type="text" name="location" placeholder="Area of Home" value="{{ project.location }}">
-      </fieldset>
-      <fieldset>
-          <label for="width">Width: </label>
-          <input id="width" type="text" name="width" placeholder="Ex. 14" value="{{ project.width }}">
-          <label for="width">feet</label>
-      </fieldset>
-      <fieldset>
-          <label for="length">Length: </label>
-          <input id="length" type="text" name="length" placeholder="Ex. 14" value="{{ project.length }}">
-          <label for="width">feet</label>
-      </fieldset>
-      <fieldset>
-          <p>Mark Project Complete</p>
-          <label for="completed"> Yes: </label>
-          <input id="completed" type="checkbox" name="completed" value=1>
-          <label for="completed"> No: </label>
-          <input id="completed" type="checkbox" name="completed" value=0>
-      </fieldset>
+          {% csrf_token %}
+          <input type="hidden" name="project_id" value="{{project.id}}">
+          <fieldset class="project__description">
+              <label for="name">Project Name: </label>
+              <input id="name" type="text" name="name" placeholder="Name Your Project" value="{{ project.name}}">
+          </fieldset>
+          <fieldset class="project__description">
+              <label for="description">Description: </label>
+              <input id="description" type="text" name="description" placeholder="Described Project" value="{{ project.description }}">
+          </fieldset>
+          <fieldset class="project__description">
+              <label for="location">Location: </label>
+              <input id="location" type="text" name="location" placeholder="Area of Home" value="{{ project.location }}">
+          </fieldset>
+          <fieldset class="project__description">
+              <label for="width">Width: </label>
+              <input id="width" type="text" name="width" placeholder="Ex. 14" value="{{ project.width }}">
+              <label for="width">feet</label>
+          </fieldset>
+          <fieldset class="project__description">
+              <label for="length">Length: </label>
+              <input id="length" type="text" name="length" placeholder="Ex. 14" value="{{ project.length }}">
+              <label for="width">feet</label>
+          </fieldset>
+          <fieldset >
+              <p class="project_description"><strong>Mark Project Complete</strong></p>
+              <label for="completed"> Yes: </label>
+              <input id="completed" type="checkbox" name="completed" value=1>
+              <label for="completed"> No: </label>
+              <input id="completed" type="checkbox" name="completed" value=0>
+          </fieldset>
 
 
-        <fieldset>
-            <label for="tool_id">Add Tools: </label>
-            <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
-            {% for tool in all_tools %}
-                      <option value="{{ tool.id }}">{{ tool.name }}</option>
-                  {% endfor %}
-            </select>
-        </fieldset>
-      <input type="hidden" name="actual_method" value="PUT">
-      <input type="submit" value="Update" />
-    </form>
-
-    <h3>Project Tools</h3>
-        <ul style="list-style-type:none">
-                {% for project_tool in project.tool_list.all %}
-                    <li id="{{project_tool.tool.id}}" name="{{project_tool.tool.id}}">Tool Name: {{project_tool.tool.name}}</li>
-                    <form action="{% url 'projectpartnerapp:project' project.id %}" method="POST">
-                    <input type="hidden" id="tool_id" name="tool_id" value={{project_tool.tool.id}}>
-                    {% csrf_token %}
-                    <input type="hidden" name="actual_method" value="DELETE">
-                    <button>Delete</button>
-                    </form>
-                {% endfor %}
-        </ul>
-    <h3>Your Project Materials</h3>
-
-          {% for material in project.materials.all %}
-
-            <li>Material Name: {{ material.name }}</li>
-            <li>Description: {{material.description}}</li>
-            <li>Cost: {{material.cost}}</li>
-            <li>Quantity: {{material.quantity}}</li>
-            <li>Project: {{material.project_id}}</li>
-            <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
-            {% csrf_token %}
-            <button>Edit Material Details</button>
-            </form>
-            <button><a href="{% url 'projectpartnerapp:material_form' %}">Add New Material</a></button>
-
+            <fieldset class="project__title">
+                <label for="tool_id"><strong>Add Tools To Project:</strong> </label>
+                <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
+                {% for tool in all_tools %}
+                          <option value="{{ tool.id }}">{{ tool.name }}</option>
+                      {% endfor %}
+                </select>
+            </fieldset>
+          <input type="hidden" name="actual_method" value="PUT">
+          <input type="submit" value="Update" />
+        </form>
+        <br></br>
+        <h3 class="project__title"><strong>Current Project Tools</strong></h3>
+            <ul style="list-style-type:none">
+                    {% for project_tool in project.tool_list.all %}
+                        <li id="{{project_tool.tool.id}}" name="{{project_tool.tool.id}}"> {{project_tool.tool.name}}</li>
+                        <form action="{% url 'projectpartnerapp:project' project.id %}" method="POST">
+                        <input type="hidden" id="tool_id" name="tool_id" value={{project_tool.tool.id}}>
+                        {% csrf_token %}
+                        <input type="hidden" name="actual_method" value="DELETE">
+                        <button>Delete</button>
+                        </form>
+                    {% endfor %}
+            </ul>
             <br></br>
-          {% endfor %}
+        <h3 class="project__title"><strong>Your Project Materials</strong></h3>
+
+              {% for material in project.materials.all %}
+
+                <li class="project_description">Material Name: {{ material.name }}</li>
+                <li class="project_description">Description: {{material.description}}</li>
+                <li class="project_description">Cost: {{material.cost}}</li>
+                <li class="project_description">Quantity: {{material.quantity}}</li>
+                <li class="project_description">Project: {{material.project_id}}</li>
+                <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
+                {% csrf_token %}
+                <button>Edit Material Details</button>
+                </form>
+                <form action="{% url 'projectpartnerapp:material' material.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="actual_method" value="DELETE">
+                <button>Delete Material</button>
+                </form>
+              {% endfor %}
+                <h3 class="project__title"><strong>Need to Add Materials?</strong></h3>
+                <button><a href="{% url 'projectpartnerapp:material_form' %}">Add New Material</a></button>
+      </div>
+    </div>
 
 
 

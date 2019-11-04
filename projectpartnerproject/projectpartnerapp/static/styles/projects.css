@@ -21,9 +21,9 @@ button:hover {
     color: bisque;
   }
 
-input {
+/* input {
     color: orange;
-}
+} */
 
 .projects {
     list-style: none;
@@ -57,6 +57,20 @@ input {
     padding: 1.5em;
     font-family: 'Walter Turncoat', cursive;
     display: inline-block;
+    /* text-align: justify; */
+
+}
+
+.edit {
+    background: bisque;
+    flex-basis: 40%;
+    padding: 2px;
+    border: 1px solid gray;
+    border-radius: 25%;
+    margin: 10px;
+    padding: 1.5em;
+    font-family: 'Walter Turncoat', cursive;
+    /* display: inline-block; */
     /* text-align: justify; */
 
 }

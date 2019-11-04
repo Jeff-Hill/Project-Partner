@@ -1,5 +1,6 @@
 from django.db import models
 from .project import Project
+from .project import Owner
 
 class Material(models.Model):
 
@@ -9,6 +10,7 @@ class Material(models.Model):
     quantity = models.IntegerField(null=True, blank=True)
     project = models.ForeignKey(Project, on_delete=models.DO_NOTHING, related_name='materials')
     image = models.ImageField(upload_to='images/', null=True, blank=True, height_field='url_height', width_field='url_width')
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

@@ -10,13 +10,13 @@
     <meta charset="utf-8">
 
     <title>Project Partner</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
 
-    {% block css %}
-    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
-    {% endblock %}
 
     <h2 class="project__title">All {{ user.first_name }}'s Projects</h2>
     <button class="btn btn-secondary"><a style="text-decoration:none;" href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>

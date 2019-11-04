@@ -24,9 +24,12 @@
             <li class="navList__route"><a href="{% url 'projectpartnerapp:projects' %}">Projects</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:tools' %}">Tools</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:materials' %}">Materials</a></li>
-            <li class="navList__route"><a href="{% url 'projectpartnerapp:register' %}">Register</a></li>
-            <li class="navList__route"><a href="{% url 'projectpartnerapp:login' %}">Login</a></li>
+        {% if request.user.is_authenticated %}
             <li class="navList__route"><a href="{% url 'projectpartnerapp:logout' %}">Logout</a></li>
+        {% else %}
+            <li class="navList__route"><a href="{% url 'projectpartnerapp:login' %}">Login</a></li>
+            <li class="navList__route"><a href="{% url 'projectpartnerapp:register' %}">Register</a></li>
+        {% endif %}
         </ol>
     </nav>
 

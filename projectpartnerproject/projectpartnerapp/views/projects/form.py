@@ -7,8 +7,9 @@ from projectpartnerapp.models import Project, ProjectTool
 from ..connection import Connection
 
 
-def get_projects():
+def get_projects(request):
     with sqlite3.connect(Connection.db_path) as conn:
+        user = request.user
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
@@ -23,14 +24,15 @@ def get_projects():
             p.completed,
             p.owner_id
         from projectpartnerapp_project p
-        """)
+        where p.owner_id = ?
+        """,(user.id,))
 
         return db_cursor.fetchall()
 
 @login_required
 def project_form(request):
     if request.method == 'GET':
-        projects = get_projects()
+        projects = get_projects(request)
         template = 'projects/form.html'
         context = {
             'all_projects': projects
