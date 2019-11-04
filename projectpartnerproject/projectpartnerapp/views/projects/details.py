@@ -77,7 +77,6 @@ def project_details(request, project_id, pk=None):
     elif request.method == 'POST':
         form_data = request.POST
         tool_id = request.POST.getlist('multicheckbox[]')
-        tool_delete = form_data['tool_id']
 
         if (
             "actual_method" in form_data
@@ -124,6 +123,7 @@ def project_details(request, project_id, pk=None):
             "actual_method" in form_data
             and form_data["actual_method"] == "DELETE"
         ):
+            tool_delete = form_data['tool_id']
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
                 db_cursor.execute("""

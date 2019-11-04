@@ -27,7 +27,11 @@
             {% elif tool.own == "on" %}
             <li class="project__description"><strong>Own this tool:</strong> Yes</li>
             {% endif %}
-            <br></br>
+            {% comment %} </form>
+            <form action="{% url 'projectpartnerapp:material_edit_form' material.material_id %}" method="GET">
+                    {% csrf_token %}
+                    <button>Edit Material</button>
+            </form> {% endcomment %}
            </div>
     {% endfor %}
     </ul>

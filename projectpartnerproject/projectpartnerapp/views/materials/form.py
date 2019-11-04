@@ -7,9 +7,9 @@ from ..projects.form import get_projects
 from ..connection import Connection
 
 
-def get_materials():
+def get_materials(request):
     with sqlite3.connect(Connection.db_path) as conn:
-
+        user = request.user
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
@@ -20,17 +20,19 @@ def get_materials():
             m.description,
             m.cost,
             m.quantity,
-            m.project_id
+            m.project_id,
+            m.owner_id
         from projectpartnerapp_material m
-        """)
+        where m.owner_id = ?
+        """,(user.id,))
 
         return db_cursor.fetchall()
 
 @login_required
 def material_form(request):
     if request.method == 'GET':
-        materials = get_materials()
-        projects = get_projects()
+        materials = get_materials(request)
+        projects = get_projects(request)
         template = 'materials/form.html'
         context = {
             'all_materials': materials,

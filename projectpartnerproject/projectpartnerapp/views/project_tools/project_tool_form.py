@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from ..connection import Connection
 
 
-def get_projects():
+def get_projects(request):
     with sqlite3.connect(Connection.db_path) as conn:
+        user = request.user
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
@@ -20,12 +21,14 @@ def get_projects():
             p.completed,
             p.owner_id
         from projectpartnerapp_project p
-        """)
+        where p.owner_id = ?
+        """,(user.id,))
 
         return db_cursor.fetchall()
 
-def get_tools():
+def get_tools(request):
     with sqlite3.connect(Connection.db_path) as conn:
+        user = request.user
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
@@ -36,17 +39,19 @@ def get_tools():
             t.manufacturer,
             t.description,
             t.cost,
-            t.own
+            t.own,
+            t.owner_id
         from projectpartnerapp_tool t
-        """)
+        where t.owner_id = ?
+        """,(user.id,))
 
         return db_cursor.fetchall()
 
 @login_required
 def project_tool_form(request):
     if request.method == 'GET':
-        projects = get_projects()
-        tools = get_tools()
+        projects = get_projects(request)
+        tools = get_tools(request)
         template = 'project_tools/tool_select_form.html'
         context = {
             'all_projects': projects,

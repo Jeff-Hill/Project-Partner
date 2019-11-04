@@ -76,5 +76,5 @@ def material_details(request, material_id):
                     WHERE id = ?
                 """, (material_id,))
 
-            return redirect(reverse('projectpartnerapp:materials'))
+            return redirect(reverse('projectpartnerapp:projects'))
 

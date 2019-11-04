@@ -10,6 +10,7 @@ from ..connection import Connection
 def material_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
+            user = request.user
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
@@ -22,7 +23,8 @@ def material_list(request):
                 m.cost,
                 m.quantity
             from projectpartnerapp_material m
-            """)
+            where m.owner_id = ?
+            """,(user.id,))
 
             all_materials = []
             dataset = db_cursor.fetchall()

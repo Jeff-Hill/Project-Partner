@@ -6,47 +6,53 @@
   <head>
     <meta charset="utf-8">
     <title>Project Partner</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
+  <div class="projects">
+    <div class="project">
+        <h3 class="project__title"><strong>Project Details</strong></h3>
+        <ul class="project__description" style="list-style-type:none">
 
-    <h3>Project Details:</h3>
-    <ul style="list-style-type:none">
-
-            <li>Name: {{ project.name }}</li>
-            <li>Description: {{project.description}}</li>
-            <li>Location: {{project.location}}</li>
-            <li>Width: {{project.width}} ft.</li>
-            <li>Length: {{project.length}} ft.</li>
-            <li>Square Footage: {{project.location_sq_footage}} ft.</li>
-            {% if project.completed == 0 %}
-            <li>Project Completed: No</li>
-            {% elif project.completed == 1 %}
-            <li>Project Completed: Yes</li>
-            {% endif %}
-    </ul>
+                <li><strong>Name:</strong> {{ project.name }}</li>
+                <li><strong>Description:</strong> {{project.description}}</li>
+                <li><strong>Location:</strong> {{project.location}}</li>
+                <li><strong>Width:</strong> {{project.width}} ft.</li>
+                <li><strong>Length:</strong> {{project.length}} ft.</li>
+                <li><strong>Square Footage:</strong> {{project.location_sq_footage}} ft.</li>
+                {% if project.completed == 0 %}
+                <li><strong>Project Completed:</strong> No</li>
+                {% elif project.completed == 1 %}
+                <li><strong>Project Completed:</strong> Yes</li>
+                {% endif %}
+        </ul>
 
 
-    <h3>Project Materials</h3>
-    <ul style="list-style-type:none">
-            {% for material in project.materials.all %}
-                <li>Material Name: {{material.name}}</li>
+        <h3 class="project__title"><strong>Project Materials</strong></h3>
+        <ul class="project__description" style="list-style-type:none">
+                {% for material in project.materials.all %}
+                    <li>{{material.name}}</li>
 
-            {% endfor %}
-    </ul>
+                {% endfor %}
+        </ul>
 
-    <h3>Project Tools</h3>
-    <ul style="list-style-type:none">
-            {% for project_tool in project.tool_list.all %}
-                <li>Tool Name: {{project_tool.tool.name}}</li>
+        <h3 class="project__title"><strong>Project Tools</strong></h3>
+        <ul class="project__description" style="list-style-type:none">
+                {% for project_tool in project.tool_list.all %}
+                    <li> {{project_tool.tool.name}}</li>
 
-            {% endfor %}
-    </ul>
+                {% endfor %}
+        </ul>
 
-     <form action="{% url 'projectpartnerapp:project_edit_form' project.id %}" method="GET">
-            {% csrf_token %}
-            <button>Edit Project</button>
-      </form>
+        <form action="{% url 'projectpartnerapp:project_edit_form' project.id %}" method="GET">
+                {% csrf_token %}
+                <button>Edit Project</button>
+          </form>
+      </div>
+    </div>
 
 
 
