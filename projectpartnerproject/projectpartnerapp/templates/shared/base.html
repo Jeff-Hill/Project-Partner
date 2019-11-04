@@ -1,3 +1,4 @@
+{% load bootstrap4 %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -5,26 +6,21 @@
 <head>
     <meta charset="utf-8">
     <title>Project Partner</title>
+    <link href="https://fonts.googleapis.com/css?family=Chilanka|Dekko|Kavivanar|Walter+Turncoat&display=swap" rel="stylesheet">
 
-    <style>
-        .navList {
-            list-style-type: none;
-            display: flex;
-            border: 1px solid lightgray;
-            padding: 1em;
-        }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        .navList__route {
-            margin: 0 0.5em;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+    {% block css %}
+    {% endblock %}
 </head>
 
 <body>
 
     <nav id="site-nav">
         <ol class="navList">
-            <li class="navList__route"><a href="{% url 'projectpartnerapp:home' %}">Home</a></li>
+            <li class="navList__route"><a class="text-decoration: none" href="{% url 'projectpartnerapp:home' %}">Home</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:projects' %}">Projects</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:tools' %}">Tools</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:materials' %}">Materials</a></li>
@@ -34,8 +30,12 @@
         </ol>
     </nav>
 
-    {% block content %}
-    {% endblock %}
+    <main class="main-content">
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
 
 </body>
 

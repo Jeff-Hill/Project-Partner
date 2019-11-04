@@ -1,5 +1,5 @@
 {% extends 'shared/base.html' %}
-
+{% load bootstrap4 %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -7,16 +7,20 @@
     <meta charset="utf-8">
     <link href="{% static 'styles/multiselect.css' %}" rel="stylesheet" type="text/css">
     <title>Project Tools</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
 
+
+  <div class="projects">
+    <div class="project">
     <h1>Step 2: Add Tools</h1>
-
-
     <form action="{% url 'projectpartnerapp:project_tools' %}" method="post">
       {% csrf_token %}
-      <fieldset>
+      <fieldset class="project__title">
           <label for="project">Add to Project: </label>
           <select id="project" type="text" name="project_id">
                 {% for project in all_projects %}
@@ -25,22 +29,24 @@
           </select>
       </fieldset>
 
-      <h3>Select Multiple Tools</h3>
+      <h3 class="project__title">Select Multiple Tools</h3>
 
-      <fieldset>
-          <label for="tool_id">Add Tools: </label>
+      <fieldset class="project__description">
+          {% comment %} <label for="tool_id">Add Tools: </label> {% endcomment %}
           <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
           {% for tool in all_tools %}
+                    <ul style="list-style-type:none">
                     <option value="{{ tool.id }}">{{ tool.name }}</option>
+                    </ul>
                 {% endfor %}
           </select>
       </fieldset>
-
-
-      <input type="submit" value="Final Step" />
+      <input class="btn btn-secondary btn-lg" type="submit" value="Final Step" />
     </form>
       <h3>Don't have the tool in your inventory?</h3>
-      <button> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
+      <button class="btn btn-secondary"> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
+    </div>
+    </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="{% static 'scripts/multiselect.js' %}"></script>

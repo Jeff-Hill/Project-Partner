@@ -1,31 +1,33 @@
 {% extends 'shared/base.html' %}
-
+{% load bootstrap4 %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Project Partner Materials</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
 
-    <h1>Step 3 of 3: Add Materials</h1>
 
-
+  <div class="projects">
+    <div class="project">
+    <h1 class="project__title">Step 3 of 3: Add Materials</h1>
     <form action="{% url 'projectpartnerapp:materials' %}" method="post">
       {% csrf_token %}
-      <label for="project">Add to Project: </label>
+      <label class="project__title" for="project">Add to Project: </label>
       <fieldset>
           <select id="project" type="text" name="project_id">
-            {% comment %} {% if project.owner_id == user.id%} {% endcomment %}
                 {% for project in all_projects %}
                     <option value="{{ project.id }}">{{ project.name }}</option>
                 {% endfor %}
-            {% comment %} {% endif %} {% endcomment %}
           </select>
       </fieldset>
-      <label for="name">Materials</label>
+      <label class="project__title" for="name">Materials</label>
       <fieldset id="myForm" name="name[]">
           <input id="name[]" type="text" name="name[]" placeholder="material name">
       </fieldset>
@@ -33,6 +35,8 @@
     </form>
       <button onclick="addMaterialFunction()">Add Material</button>
     <script src="{% static 'scripts/add_material.js' %}"></script>
+    </div>
+    </div>
     {% endblock %}
   </body>
 </html>

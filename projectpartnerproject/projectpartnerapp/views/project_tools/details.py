@@ -14,8 +14,15 @@ def get_project_tool(projecttool_id):
         SELECT
             pt.id,
             pt.tool_id,
-            pt.project_id
+            pt.project_id,
+            t.id,
+            t.name,
+            t.manufacturer,
+            t.description,
+            t.cost,
+            t.own
         FROM projectpartnerapp_projecttool pt
+        JOIN projectpartnerapp_tool t ON pt.tool_id = t.id
         WHERE pt.id = ?
         """, (projecttool_id,))
 
