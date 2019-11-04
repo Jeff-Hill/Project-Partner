@@ -43,7 +43,7 @@ def project_edit_form(request, project_id, pk=None):
 
     if request.method == 'GET':
         project = Project.objects.get(pk=project_id)
-        # project_tool = ProjectTool.objects.get(pk=projecttool_id)
+        # project_tool = ProjectTool.objects.get()
         tools = get_tools()
 
         template = 'projects/project_edit_form.html'

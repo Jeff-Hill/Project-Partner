@@ -1,5 +1,5 @@
 {% extends 'shared/base.html' %}
-{% load bootstrap4 %}
+{% comment %} {% load bootstrap4 %} {% endcomment %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -67,7 +67,8 @@
         <ul style="list-style-type:none">
                 {% for project_tool in project.tool_list.all %}
                     <li id="{{project_tool.tool.id}}" name="{{project_tool.tool.id}}">Tool Name: {{project_tool.tool.name}}</li>
-                    <form action="{% url 'projectpartnerapp:project' project_tool.tool.id %}" method="POST">
+                    <form action="{% url 'projectpartnerapp:project' project.id %}" method="POST">
+                    <input type="hidden" id="tool_id" name="tool_id" value={{project_tool.tool.id}}>
                     {% csrf_token %}
                     <input type="hidden" name="actual_method" value="DELETE">
                     <button>Delete</button>
