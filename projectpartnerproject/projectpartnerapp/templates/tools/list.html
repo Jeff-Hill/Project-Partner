@@ -1,30 +1,34 @@
 {% extends 'shared/base.html' %}
-
+{% load bootstrap4 %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Project Partner Tools</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
     <h1>Tools in Inventory</h1>
-    <button> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
+    <button class="btn btn-secondary"> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
 
-    <ul style="list-style-type:none">
+    <ul class="projects" style="list-style-type:none">
     {% for tool in all_tools %}
-
-            <li>Tool Name: {{ tool.name }}</li>
-            <li>Manufacturer: {{ tool.manufacturer }}</li>
-            <li>Description: {{tool.description}}</li>
-            <li>Cost: ${{tool.cost}}</li>
+          <div class="resource">
+            <li class="project__title"><strong>Tool Name:</strong> {{ tool.name }}</li>
+            <li class="project__description"><strong>Manufacturer:</strong> {{ tool.manufacturer }}</li>
+            <li class="project__description"><strong>Description:</strong> {{tool.description}}</li>
+            <li class="project__description"><strong>Cost: $</strong>{{tool.cost}}</li>
             {% if tool.own == "off" %}
-            <li>Own this tool: No</li>
+            <li class="project__description"><strong>Own this tool:</strong> No</li>
             {% elif tool.own == "on" %}
-            <li>Own this tool: Yes</li>
+            <li class="project__description"><strong>Own this tool:</strong> Yes</li>
             {% endif %}
             <br></br>
+           </div>
     {% endfor %}
     </ul>
     {% endblock %}

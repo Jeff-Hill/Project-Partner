@@ -1,0 +1,72 @@
+a {
+    color: orange;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    padding: 6px 0;
+    color: bisque;
+  }
+
+button {
+    color: orange;
+    margin: 5px;
+    background-color: grey;
+}
+
+button:hover {
+    text-decoration: none;
+    padding: 6px 0;
+    color: bisque;
+  }
+
+input {
+    color: orange;
+}
+
+.projects {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 1px;
+}
+
+.project {
+    background: bisque;
+    flex-basis: 30%;
+    padding: 2px;
+    border: 1px solid gray;
+    border-radius: 25%;
+    margin: 0 auto;
+    padding: 1.5em;
+    font-family: 'Walter Turncoat', cursive;
+    display: inline-block;
+
+}
+
+.resource {
+    background: bisque;
+    flex-basis: 25%;
+    padding: 2px;
+    border: 1px solid gray;
+    border-radius: 25%;
+    margin: 10px;
+    padding: 1.5em;
+    font-family: 'Walter Turncoat', cursive;
+    display: inline-block;
+    /* text-align: justify; */
+
+}
+
+.project__title {
+    font-size: 1.1em;
+}
+
+.project__description {
+    font-size: 0.75em;
+    padding: 5px;
+    margin: 5px;
+}

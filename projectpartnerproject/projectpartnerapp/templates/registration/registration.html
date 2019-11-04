@@ -1,43 +1,49 @@
 {% extends 'shared/base.html' %}
-
+{% load bootstrap4 %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Project Partner</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/auth.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
-    <h1>Registration Form</h1>
 
 
-    <form action="{% url 'projectpartnerapp:register' %}" method="post">
-      {% csrf_token %}
-      <fieldset>
-          <label for="username">Username: </label>
-          <input id="username" type="text" name="username">
-      </fieldset>
-      <fieldset>
-          <label for="first_name">First Name: </label>
-          <input id="first_name" type="text" name="first_name">
-      </fieldset>
-      <fieldset>
-          <label for="last_name">Last Name: </label>
-          <input id="last_name" type="text" name="last_name">
-      </fieldset>
-      <fieldset>
-          <label for="password">Password: </label>
-          <input id="password" type="password" name="password">
-      </fieldset>
-      <fieldset>
-          <label for="email">Email: </label>
-          <input id="email" type="text" name="email">
-      </fieldset>
-
-
-      <input type="submit" value="Register" />
-    </form>
+    <div class="card text-center container d-flex border border-dark" style="width: 18rem;">
+      <div class="row align-items-center h-25">
+      <form action="{% url 'projectpartnerapp:register' %}" method="post">
+        {% csrf_token %}
+        <h1 class="card-title">Registration Form</h1>
+        <fieldset class="card-text">
+            <label for="username">Username: </label>
+            <input id="username" type="text" name="username">
+        </fieldset>
+        <fieldset class="card-text">
+            <label for="first_name">First Name: </label>
+            <input id="first_name" type="text" name="first_name">
+        </fieldset>
+        <fieldset class="card-text">
+            <label for="last_name">Last Name: </label>
+            <input id="last_name" type="text" name="last_name">
+        </fieldset>
+        <fieldset class="card-text">
+            <label for="password">Password: </label>
+            <input id="password" type="password" name="password">
+        </fieldset>
+        <fieldset class="card-text">
+            <label for="email">Email: </label>
+            <input id="email" type="text" name="email">
+        </fieldset>
+        <input class="card-text" type="submit" value="Register" />
+      </form>
+      </div>
+    </div>
     {% endblock %}
   </body>
 </html>

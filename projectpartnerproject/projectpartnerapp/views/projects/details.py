@@ -125,9 +125,9 @@ def project_details(request, project_id, pk=None):
         ):
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
-
+            if(project.tool.id == project.tool_list.tool.id):
                 db_cursor.execute("""
-                    DELETE FROM projectpartnerapp_project
+                    DELETE FROM projectpartnerapp_projecttool
                     WHERE id = ?
                 """, (project_id,))
 

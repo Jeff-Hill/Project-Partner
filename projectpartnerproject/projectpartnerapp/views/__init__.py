@@ -9,6 +9,7 @@ from .projects.list import project_list
 from .projects.form import project_form, project_edit_form
 from .project_tools.project_tool_form import project_tool_form
 from .project_tools.list import project_tool_list
+from .project_tools.details import project_tool_details
 from .projects.details import project_details
 from .home import home
 from .register.registration import register_user

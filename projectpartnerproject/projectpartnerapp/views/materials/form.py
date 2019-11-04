@@ -58,7 +58,6 @@ def material_edit_form(request, material_id):
     elif request.method == 'POST':
         form_data = request.POST
 
-        # Check if this POST is for editing a book
         if (
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"

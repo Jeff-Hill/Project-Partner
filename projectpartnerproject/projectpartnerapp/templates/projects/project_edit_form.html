@@ -1,5 +1,5 @@
 {% extends 'shared/base.html' %}
-
+{% load bootstrap4 %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -42,31 +42,14 @@
           <input id="length" type="text" name="length" placeholder="Ex. 14" value="{{ project.length }}">
           <label for="width">feet</label>
       </fieldset>
-      {% comment %} {% if project.id is not None %} {% endcomment %}
-      {% comment %} <fieldset>
-      <label for="completed">Completed: </label>
-      <input type="checkbox" name="completed" value="{{ project.completed }}">
-      </fieldset> {% endcomment %}
-      {% comment %} {% else %}
-      <input type="hidden" name="completed" value="0">
-      {% endif %} {% endcomment %}
-
       <fieldset>
           <p>Mark Project Complete</p>
           <label for="completed"> Yes: </label>
           <input id="completed" type="checkbox" name="completed" value=1>
           <label for="completed"> No: </label>
           <input id="completed" type="checkbox" name="completed" value=0>
-
       </fieldset>
 
-      <h3>Project Tools</h3>
-        <ul style="list-style-type:none">
-                {% for project_tool in project.tool_list.all %}
-                    <li>Tool Name: {{project_tool.tool.name}}</li>
-
-                {% endfor %}
-        </ul>
 
         <fieldset>
             <label for="tool_id">Add Tools: </label>
@@ -76,14 +59,21 @@
                   {% endfor %}
             </select>
         </fieldset>
-      {% comment %} {% if project.id is not None %} {% endcomment %}
       <input type="hidden" name="actual_method" value="PUT">
       <input type="submit" value="Update" />
-      {% comment %} {% else %}
-      <input type="submit" value="Next Step" />
-      {% endif %} {% endcomment %}
     </form>
 
+    <h3>Project Tools</h3>
+        <ul style="list-style-type:none">
+                {% for project_tool in project.tool_list.all %}
+                    <li id="{{project_tool.tool.id}}" name="{{project_tool.tool.id}}">Tool Name: {{project_tool.tool.name}}</li>
+                    <form action="{% url 'projectpartnerapp:project' project_tool.tool.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="actual_method" value="DELETE">
+                    <button>Delete</button>
+                    </form>
+                {% endfor %}
+        </ul>
     <h3>Your Project Materials</h3>
 
           {% for material in project.materials.all %}

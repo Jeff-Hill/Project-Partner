@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .details import get_project
 from ..tools.new_tool_form import get_tools
-from projectpartnerapp.models import Project
+from projectpartnerapp.models import Project, ProjectTool
 from ..connection import Connection
 
 
@@ -43,12 +43,14 @@ def project_edit_form(request, project_id, pk=None):
 
     if request.method == 'GET':
         project = Project.objects.get(pk=project_id)
+        # project_tool = ProjectTool.objects.get(pk=projecttool_id)
         tools = get_tools()
 
         template = 'projects/project_edit_form.html'
         context = {
             'project': project,
-            'all_tools': tools
+            'all_tools': tools,
+            # 'project_tools': project_tool
         }
 
         return render(request, template, context)

@@ -1,38 +1,41 @@
 {% extends 'shared/base.html' %}
-
+{% load bootstrap4 %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Project Partner Materials</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
 
     <h1>Materials in Inventory</h1>
 
-    <ul style="list-style-type:none">
+    <ul class="projects" style="list-style-type:none">
     {% for material in all_materials %}
+          <div class="resource">
+            <li><strong>Material Name:</strong> {{ material.name }}</li>
+            <li><strong>Description:</strong> {{material.description}}</li>
+            <li><strong>Cost:</strong> {{material.cost}}</li>
+            <li><strong>Quantity:</strong> {{material.quantity}}</li>
+            <li><strong>Project:</strong> {{material.project.name}}</li>
+            <form action="{% url 'projectpartnerapp:material' material.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="actual_method" value="DELETE">
+                    <button>Delete Material</button>
+            </form>
 
-            <li>Material Name: {{ material.name }}</li>
-            <li>Description: {{material.description}}</li>
-            <li>Cost: {{material.cost}}</li>
-            <li>Quantity: {{material.quantity}}</li>
-            <li>Project: {{material.project_id}}</li>
-            <br></br>
+            <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
+                    {% csrf_token %}
+                    <button>Edit Material</button>
+            </form>
+            </div>
     {% endfor %}
     </ul>
-    {% comment %} <form action="{% url 'projectpartnerapp:material' material.id %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="actual_method" value="DELETE">
-            <button>Delete Material</button>
-    </form>
-
-    <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
-            {% csrf_token %}
-            <button>Edit Material</button>
-    </form> {% endcomment %}
 
     {% endblock %}
   </body>

@@ -1,39 +1,47 @@
 {% extends 'shared/base.html' %}
-
+{% load bootstrap4 %}
+{% bootstrap_messages %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+    {% bootstrap_css %}
     <title>Project Partner</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+    {% endblock %}
   </head>
   <body>
     {% block content %}
+
     {% if request.user.is_authenticated %}
       <h2>Welcome, {{ user.first_name }}. Thanks for logging in.</h2>
 
     <h3>Your Open Projects</h3>
-    <button><a href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
+    <button class="btn btn-secondary"><a class="text-decoration:none" href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
 
-    <ul style="list-style-type:none">
+    <ul class="projects" style="list-style-type:none">
     {% for project in all_projects %}
       {% if project.owner_id == user.id%}
           {% if project.completed == 0 %}
-           <li> Project Name: {{ project.name }}</li>
-            <li>Description: {{project.description}}</li>
-            <li>Location: {{project.location}}</li>
-            <li>Width: {{project.width}}</li>
-            <li>Length: {{project.length}}</li>
-            <li>Square Footage: {{project.width}} x {{project.length}} = {{project.location_sq_footage}}</li>
+          <div class="project">
+           <li class="project__title"> <strong>Project Name:</strong> {{ project.name }}</li>
+            <li class="project__description"><strong>Description:</strong> {{project.description}}</li>
+            <li class="project__description"><strong>Location:</strong> {{project.location}}</li>
+            <li class="project__description"><strong>Width:</strong> {{project.width}} ft.</li>
+            <li class="project__description"><strong>Length:</strong> {{project.length}} ft.</li>
+            <li class="project__description"><strong>Square Footage:</strong> {{project.location_sq_footage}} ft.</li>
             {% if project.completed == 0 %}
-            <li>Project Completed: No</li>
+            <li class="project__description"><strong>Project Completed:</strong> No</li>
             {% elif project.completed == 1 %}
-            <li>Project Completed: Yes</li>
+            <li class="project__description"><strong>Project Completed:</strong> Yes</li>
             {% endif %}
-            <button> <a href="{% url 'projectpartnerapp:project' project.id %}">Details </a></button>
+            <button class="btn btn-secondary"> <a href="{% url 'projectpartnerapp:project' project.id %}">Details </a></button>
 
           {% endif %}
           <br></br>
+          </div>
       {% endif %}
 
 
@@ -43,5 +51,7 @@
           <h2>Welcome, new user. Please Login or Register.</h2>
     {% endif %}
     {% endblock %}
+
+    {% bootstrap_javascript jquery='full' %}
   </body>
 </html>
