@@ -27,11 +27,12 @@
             {% elif tool.own == "on" %}
             <li class="project__description"><strong>Own this tool:</strong> Yes</li>
             {% endif %}
-            {% comment %} </form>
-            <form action="{% url 'projectpartnerapp:material_edit_form' material.material_id %}" method="GET">
-                    {% csrf_token %}
-                    <button>Edit Material</button>
-            </form> {% endcomment %}
+            <form action="{% url 'projectpartnerapp:tool' tool.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+            <button>Delete</button>
+            </form>
+
            </div>
     {% endfor %}
     </ul>

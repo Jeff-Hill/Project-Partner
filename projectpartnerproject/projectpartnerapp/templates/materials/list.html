@@ -23,8 +23,7 @@
             <li><strong>Cost:</strong> {{material.cost}}</li>
             <li><strong>Quantity:</strong> {{material.quantity}}</li>
             <li><strong>Project:</strong> {{material.project.name}}</li>
-            <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
-                {% csrf_token %}
+            <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}?next={{ request.path|urlencode }}" method="GET">
                 <button>Edit Material Details</button>
             </form>
             <form action="{% url 'projectpartnerapp:material' material.id %}" method="POST">

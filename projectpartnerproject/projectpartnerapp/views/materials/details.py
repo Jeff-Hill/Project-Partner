@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from ..connection import Connection
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 
 
@@ -39,6 +41,8 @@ def material_details(request, material_id):
 
     elif request.method == 'POST':
         form_data = request.POST
+        next = request.POST.get('next', '/projects')
+        return HttpResponseRedirect(next)
 
         if (
             "actual_method" in form_data
@@ -62,7 +66,7 @@ def material_details(request, material_id):
                     form_data['project_id'], material_id
                 ))
 
-            return redirect(reverse('projectpartnerapp:projects'))
+            return redirect(reverse(next))
 
         if (
             "actual_method" in form_data

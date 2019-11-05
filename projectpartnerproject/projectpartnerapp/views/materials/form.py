@@ -46,7 +46,7 @@ def material_edit_form(request, material_id):
 
     if request.method == 'GET':
         material = get_material(material_id)
-        projects = get_projects()
+        projects = get_projects(request)
 
         template = 'materials/material_edit_form.html'
         context = {
@@ -82,7 +82,7 @@ def material_edit_form(request, material_id):
                     form_data['project_id'], material_id
                 ))
 
-            return redirect(reverse('projectpartnerapp:material'))
+            return redirect(reverse('projectpartnerapp:materials'))
 
         if (
             "actual_method" in form_data

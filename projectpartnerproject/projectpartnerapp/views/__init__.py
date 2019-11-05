@@ -5,6 +5,7 @@ from .materials.details import material_details
 from .materials.form import material_form, material_edit_form
 from .tools.list import tool_list
 from .tools.new_tool_form import new_tool_form
+from .tools.details import tool_details
 from .projects.list import project_list
 from .projects.form import project_form, project_edit_form
 from .project_tools.project_tool_form import project_tool_form

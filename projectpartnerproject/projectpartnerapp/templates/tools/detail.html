@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project Partner</title>
+  </head>
+  <body>
+    {% block content %}
+
+    <h1>Tools in Inventory</h1>
+
+    <ul style="list-style-type:none">
+    {% for tool in all_tools %}
+
+            <li>tool Name: {{ tool.name }}</li>
+            <li>Description: {{tool.manufacturer}}</li>
+            <li>Description: {{tool.description}}</li>
+            <li>Cost: {{tool.cost}}</li>
+            <li>Quantity: {{tool.own}}</li>
+            <li>Project: {{tool.owner_id}}</li>
+            <br></br>
+    {% endfor %}
+    </ul>
+    <form action="{% url 'projectpartnerapp:tool' tool.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="DELETE">
+    <button>Delete</button>
+    </form>
+
+    <form action="{% url 'projectpartnerapp:tool_edit_form' tool.tool_id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit tool</button>
+    </form>
+
+
+
+    {% endblock %}
+
+  </body>
+</html>

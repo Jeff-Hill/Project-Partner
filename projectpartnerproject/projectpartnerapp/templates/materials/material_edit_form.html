@@ -28,17 +28,18 @@
           </fieldset>
           <fieldset class="project__description">
               <label for="description">Description: </label>
-              <input id="description" type="text" name="description" placeholder="Add Description" value="">
+              <input style=" height: 100px; width:200px; " id="description" type="text" name="description" placeholder="Add Description" value="{{ material.description }}">
           </fieldset>
           <fieldset class="project__description">
               <label for="cost">Cost: </label>
-              <input id="cost" type="text" name="cost" placeholder="Total Material Cost" value="">
+              <input id="cost" type="text" name="cost" placeholder="Total Material Cost" value="{{ material.cost }}">
           </fieldset>
           <fieldset class="project__description">
               <label for="quantity">Quantity: </label>
-              <input id="quantity" type="text" name="quantity" placeholder="Quantity" value="">
+              <input id="quantity" type="text" name="quantity" placeholder="Quantity" value="{{ material.quantity }}">
               <label for="quantity">feet</label>
           </fieldset>
+          <input type="hidden" name="next" value="{{ request.GET.next }}">
           <input type="hidden" name="actual_method" value="PUT">
           <input type="submit" value="Update" />
 
