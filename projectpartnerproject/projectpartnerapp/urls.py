@@ -34,6 +34,8 @@ urlpatterns = [
     url(r'^tools$', tool_list, name='tools'),
     url(r'^new-tool/form$', new_tool_form, name='new_tool_form'),
     path('tools/<int:tool_id>/', tool_details, name='tool'),
+    url(r'^tools/(?P<tool_id>[0-9]+)/form$', tool_edit_form, name='tool_edit_form'),
+
 
     url(r'^project-tools$', project_tool_list, name='project_tools'),
     url(r'^project-tool/form$', project_tool_form, name='project_tool_form'),

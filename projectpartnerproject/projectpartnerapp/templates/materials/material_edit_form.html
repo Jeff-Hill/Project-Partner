@@ -39,7 +39,8 @@
               <input id="quantity" type="text" name="quantity" placeholder="Quantity" value="{{ material.quantity }}">
               <label for="quantity">feet</label>
           </fieldset>
-          <input type="hidden" name="next" value="{{ request.GET.next }}">
+          <input type="hidden" name="next" value="{{ next }}">
+
           <input type="hidden" name="actual_method" value="PUT">
           <input type="submit" value="Update" />
 

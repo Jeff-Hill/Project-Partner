@@ -47,12 +47,15 @@ def material_edit_form(request, material_id):
     if request.method == 'GET':
         material = get_material(material_id)
         projects = get_projects(request)
+        next = request.GET['next']
+
 
         template = 'materials/material_edit_form.html'
         context = {
             'material': material,
             'all_projects': projects,
-            "material_id": material_id
+            "material_id": material_id,
+            "next": next
         }
 
         return render(request, template, context)
@@ -77,9 +80,9 @@ def material_edit_form(request, material_id):
                 WHERE id = ?
                 """,
                 (
-                    form_data['name'], form_data['description'],
-                    form_data['cost'], form_data['quantity'],
-                    form_data['project_id'], material_id
+                    form_data['name'] or None, form_data['description'] or None,
+                    form_data['cost'] or None, form_data['quantity'] or None,
+                    form_data['project_id'] or None, material_id
                 ))
 
             return redirect(reverse('projectpartnerapp:materials'))

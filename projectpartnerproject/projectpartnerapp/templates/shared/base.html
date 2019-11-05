@@ -23,7 +23,7 @@
             <li class="navList__route"><a class="text-decoration: none" href="{% url 'projectpartnerapp:home' %}">Home</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:projects' %}">Projects</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:tools' %}">Tools</a></li>
-            <li class="navList__route"><a href="{% url 'projectpartnerapp:materials' %}">Materials</a></li>
+            <li class="navList__route"><a href="{% url 'projectpartnerapp:materials' %}?next={{ request.path|urlencode }}">Materials</a></li>
         {% if request.user.is_authenticated %}
             <li class="navList__route"><a href="{% url 'projectpartnerapp:logout' %}">Logout</a></li>
         {% else %}
@@ -33,6 +33,7 @@
         </ol>
     </nav>
 
+    <img class="background" src="{% static "images/home-photo-collage.jpg" %}" alt="Home Project Photos">
     <main class="main-content">
 
         {% block content %}

@@ -32,6 +32,10 @@
             <input type="hidden" name="actual_method" value="DELETE">
             <button>Delete</button>
             </form>
+            <form action="{% url 'projectpartnerapp:tool_edit_form' tool.id %}" method="GET">
+            {% csrf_token %}
+            <button>Edit</button>
+            </form>
 
            </div>
     {% endfor %}

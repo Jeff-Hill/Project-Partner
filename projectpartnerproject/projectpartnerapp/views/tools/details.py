@@ -20,7 +20,7 @@ def get_tool(tool_id):
            t.own,
            t.owner_id
         FROM projectpartnerapp_tool t
-        WHEREt.id = ?
+        WHERE t.id = ?
         """, (tool_id,))
 
         return db_cursor.fetchone()
@@ -40,6 +40,30 @@ def tool_details(request, tool_id):
     if request.method == 'POST':
         form_data = request.POST
 
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                UPDATE projectpartnerapp_tool
+                SET name = ?,
+                    manufacturer = ?,
+                    description = ?,
+                    cost = ?,
+                    own = ?,
+                    owner_id = ?
+                WHERE id = ?
+                """,
+                (
+                    form_data['name'], form_data['manufacturer'],
+                    form_data['description'], form_data['cost'],
+                    form_data["own"], request.user.owner.id, tool_id,
+                ))
+
+            return redirect(reverse('projectpartnerapp:tools'))
 
         if (
             "actual_method" in form_data

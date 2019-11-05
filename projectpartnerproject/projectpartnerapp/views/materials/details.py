@@ -41,13 +41,12 @@ def material_details(request, material_id):
 
     elif request.method == 'POST':
         form_data = request.POST
-        next = request.POST.get('next', '/projects')
-        return HttpResponseRedirect(next)
 
         if (
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):
+            next = form_data["next"]
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
 
@@ -66,7 +65,8 @@ def material_details(request, material_id):
                     form_data['project_id'], material_id
                 ))
 
-            return redirect(reverse(next))
+            # return redirect(reverse(next))
+            return HttpResponseRedirect(next)
 
         if (
             "actual_method" in form_data

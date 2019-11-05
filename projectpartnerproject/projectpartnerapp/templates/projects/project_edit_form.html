@@ -27,7 +27,7 @@
           </fieldset>
           <fieldset class="project__description">
               <label for="description">Description: </label>
-              <input id="description" type="text" name="description" placeholder="Described Project" value="{{ project.description }}">
+              <input style=" height: 100px; width:200px; "id="description" type="text" name="description" placeholder="Described Project" value="{{ project.description }}">
           </fieldset>
           <fieldset class="project__description">
               <label for="location">Location: </label>
@@ -85,9 +85,10 @@
                 <li class="project_description">Description: {{material.description}}</li>
                 <li class="project_description">Cost: {{material.cost}}</li>
                 <li class="project_description">Quantity: {{material.quantity}}</li>
-                <li class="project_description">Project: {{material.project_id}}</li>
+                {% comment %} <li class="project_description">Project: {{material.project_id}}</li> {% endcomment %}
                 <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="/projects">
                 <button>Edit Material Details</button>
                 </form>
                 <form action="{% url 'projectpartnerapp:material' material.id %}" method="POST">

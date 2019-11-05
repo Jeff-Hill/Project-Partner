@@ -16,35 +16,51 @@
     <div class="projects">
       <div class="resource">
 
-          <h1 class="project__title">Add Tool to Inventory</h1>
-          <form action="{% url 'projectpartnerapp:tools' %}" method="post">
+            <h1 class="project__title">Add Tool to Inventory</h1>
+            {% if tool.id is not None %}
+            <form action="{% url 'projectpartnerapp:tool' tool.id %}" method="post">
+            {% else %}
+                <form action="{% url 'projectpartnerapp:tools' %}" method="post">
+            {% endif %}
             {% csrf_token %}
             <fieldset class="project__title">
                 <label for="name">Tool Name: </label>
-                <input id="name" type="text" name="name" required>
+                <input id="name" type="text" name="name" required value="{{tool.name}}">
             </fieldset>
             <fieldset class="project__title">
                 <label for="manufacturer">Manufacturer: </label>
-                <input id="manufacturer" type="text" name="manufacturer">
+                <input id="manufacturer" type="text" name="manufacturer" value="{{tool.manufacturer}}">
             </fieldset>
             <fieldset class="project__title">
                 <label for="description">Description: </label>
-                <input id="description" type="text" style=" height: 200px; width:280px; " name="description">
+                <input id="description" type="text" style=" height: 200px; width:280px; " name="description" value="{{tool.description}}">
             </fieldset>
             <fieldset class="project__title">
                 <label for="cost">Cost:</label>
-                <input id="cost" type="number" name="cost">
+                <input id="cost" type="number" name="cost" value="{{tool.cost}}">
             </fieldset>
             <fieldset class="project__title">
                 <p>Own It?</p>
+              {% if tool.own == "on" %}
+                <label for="own"> Yes: </label>
+                <input id="own" type="checkbox" name="own" value="on" checked>
+                <label for="own"> No: </label>
+                <input id="own" type="checkbox" name="own" value="off">
+              {% else %}
                 <label for="own"> Yes: </label>
                 <input id="own" type="checkbox" name="own" value="on">
                 <label for="own"> No: </label>
-                <input id="own" type="checkbox" name="own" value="off">
+                <input id="own" type="checkbox" name="own" value="off" checked>
+              {% endif %}
 
             </fieldset>
+            {% if tool.id is not None %}
+              <input type="hidden" name="actual_method" value="PUT">
+              <input type="submit" value="Update Tool" />
+              {% else %}
+              <input type="submit" value="Add Tool" />
+            {% endif %}
 
-            <input type="submit" value="Add Tool" />
           </form>
         </div>
       </div>
