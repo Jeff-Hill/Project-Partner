@@ -77,4 +77,12 @@ def tool_details(request, tool_id):
                 WHERE id = ?
                 """, (tool_id,))
 
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                DELETE FROM projectpartnerapp_projecttool
+                WHERE tool_id = ?
+                """, (tool_id,))
+
             return redirect(reverse('projectpartnerapp:tools'))

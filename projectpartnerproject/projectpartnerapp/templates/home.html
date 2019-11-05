@@ -16,9 +16,9 @@
     {% block content %}
 
     {% if request.user.is_authenticated %}
-      <h2>Welcome, {{ user.first_name }}. Thanks for logging in.</h2>
+      <h2>Welcome, {{ user.first_name }}. Here are your open projects.</h2>
 
-    <h3>Your Open Projects</h3>
+    {% comment %} <h3>Your Open Projects</h3> {% endcomment %}
     <button class="btn btn-secondary"><a class="text-decoration:none" href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
 
     <ul class="projects" style="list-style-type:none">

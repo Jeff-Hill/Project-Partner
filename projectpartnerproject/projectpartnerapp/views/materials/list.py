@@ -21,7 +21,8 @@ def material_list(request):
                 m.name,
                 m.description,
                 m.cost,
-                m.quantity
+                m.quantity,
+                m.owner_id
             from projectpartnerapp_material m
             where m.owner_id = ?
             """,(user.id,))
@@ -59,12 +60,12 @@ def material_list(request):
                 db_cursor.execute("""
                 INSERT INTO projectpartnerapp_material
                 (
-                    name, project_id
+                    name, project_id, owner_id
                 )
-                VALUES (?, ?)
+                VALUES (?, ?, ?)
                 """,
                 (material,
-                form_data['project_id']))
+                form_data['project_id'], request.user.owner.id))
 
         return redirect(reverse('projectpartnerapp:home'))
 
