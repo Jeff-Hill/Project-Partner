@@ -16,7 +16,7 @@
 
   <div class="projects">
     <div class="project">
-    <h1 class="project__title">Step 3 of 3: Add Materials</h1>
+    <h1 class="project__title">Final Step: Add Materials</h1>
     <form action="{% url 'projectpartnerapp:materials' %}" method="post">
       {% csrf_token %}
       <label class="project__title" for="project">Add to Project: </label>
@@ -31,7 +31,7 @@
       <fieldset id="myForm" name="name[]">
           <input id="name[]" type="text" name="name[]" placeholder="material name">
       </fieldset>
-      <input type="submit" value="Finish Creating Project" />
+      <input type="submit" value="Add Materials" />
     </form>
       <button onclick="addMaterialFunction()">Add Material</button>
     <script src="{% static 'scripts/add_material.js' %}"></script>

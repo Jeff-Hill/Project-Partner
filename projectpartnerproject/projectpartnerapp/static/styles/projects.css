@@ -21,9 +21,9 @@ button:hover {
     color: bisque;
   }
 
-/* input {
-    color: orange;
-} */
+.header {
+    text-align: center;
+}
 
 .projects {
     list-style: none;

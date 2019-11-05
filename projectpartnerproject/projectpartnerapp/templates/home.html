@@ -16,11 +16,11 @@
     {% block content %}
 
     {% if request.user.is_authenticated %}
+    <div class="header">
       <h2>Welcome, {{ user.first_name }}. Here are your open projects.</h2>
 
-    {% comment %} <h3>Your Open Projects</h3> {% endcomment %}
     <button class="btn btn-secondary"><a class="text-decoration:none" href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
-
+  </div>
     <ul class="projects" style="list-style-type:none">
     {% for project in all_projects %}
       {% if project.owner_id == user.id%}
