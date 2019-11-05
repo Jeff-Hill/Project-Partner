@@ -58,12 +58,12 @@ def tool_list(request):
             INSERT INTO projectpartnerapp_tool
             (
                 name, manufacturer, description,
-                cost, own
+                cost, own, owner_id
             )
-            VALUES (?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?)
             """,
             (form_data['name'], form_data['manufacturer'],
                 form_data['description'], form_data['cost'],
-                form_data["own"]))
+                form_data["own"], request.user.owner.id))
 
         return redirect(reverse('projectpartnerapp:tools'))

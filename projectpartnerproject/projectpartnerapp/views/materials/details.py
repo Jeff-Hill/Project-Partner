@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from ..connection import Connection
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 
 
@@ -44,6 +46,7 @@ def material_details(request, material_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):
+            next = form_data["next"]
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
 
@@ -62,7 +65,8 @@ def material_details(request, material_id):
                     form_data['project_id'], material_id
                 ))
 
-            return redirect(reverse('projectpartnerapp:projects'))
+            # return redirect(reverse(next))
+            return HttpResponseRedirect(next)
 
         if (
             "actual_method" in form_data
