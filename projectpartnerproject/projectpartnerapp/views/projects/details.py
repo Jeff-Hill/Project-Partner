@@ -65,7 +65,6 @@ def get_project(project_id):
 @login_required
 def project_details(request, project_id, pk=None):
     if request.method == 'GET':
-        # project = get_project(project_id)
         project = Project.objects.get(pk=project_id)
         template = 'projects/detail.html'
         context = {

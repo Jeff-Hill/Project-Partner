@@ -3,7 +3,9 @@ from .project import Project
 from .project import Owner
 
 class Material(models.Model):
-
+# Create a model for a project material. Set blank=True and null=True so some properties can be initially set as NULL for future editing
+# and the form fields can be left blank
+# Set an owner Foreign Key property so you can filter data to be displayed by the user logged in
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=50, null=True, blank=True)
     cost = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)

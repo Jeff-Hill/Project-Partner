@@ -49,11 +49,3 @@ def register_user(request):
 
 
 
-        # return redirect(reverse('projectpartnerapp:/'))
-
-        # Commit the user to the database by saving it
-        # owner.save()
-
-        # data = form_data(owner)
-
-        # return render(data, request, content_type='application/json')

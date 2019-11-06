@@ -16,11 +16,11 @@
   </head>
   <body>
     {% block content %}
-
-
+{% comment %} This will list all the users project Open and Closed for reference {% endcomment %}
+    <div class="header">
     <h2 class="project__title">All {{ user.first_name }}'s Projects</h2>
     <button class="btn btn-secondary"><a style="text-decoration:none;" href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
-
+    </div>
     <ul class="projects" style="list-style-type:none">
     {% for project in all_projects %}
       {% if project.owner_id == user.id%}
@@ -39,7 +39,6 @@
             <button class="btn btn-secondary"> <a href="{% url 'projectpartnerapp:project' project.id %}">Details </a></button>
         </div>
 
-        {% comment %} <br></br> {% endcomment %}
       {% endif %}
 
 

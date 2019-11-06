@@ -39,12 +39,10 @@ def tool_edit_form(request, tool_id):
 
     if request.method == 'GET':
         tool = get_tool(tool_id)
-        # libraries = get_libraries()
 
         template = 'tools/new_tool_form.html'
         context = {
             'tool': tool,
-            # 'all_libraries': libraries
         }
 
         return render(request, template, context)

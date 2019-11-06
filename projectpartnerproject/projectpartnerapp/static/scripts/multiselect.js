@@ -1,29 +1,4 @@
-/**
- * Display a nice easy to use multiselect list
- * @Version: 2.0.2
- * @Author: Patrick Springstubbe
- * @Contact: @JediNobleclem
- * @Website: springstubbe.us
- * @Source: https://github.com/nobleclem/jQuery-MultiSelect
- * @Notes: If select list is hidden on page load use the jquery.actual plugin
- *         to resolve issues with preselected items placeholder text
- *         https://github.com/dreamerslab/jquery.actual
- *
- * Usage:
- *     $('select[multiple]').multiselect();
- *     $('select[multiple]').multiselect({ placeholder: 'Select options' });
- *     $('select[multiple]').multiselect('reload');
- *     $('select[multiple]').multiselect( 'loadOption', [{
- *         name   : 'Option Name 1',
- *         value  : 'option-value-1',
- *         checked: false
- *     },{
- *         name   : 'Option Name 2',
- *         value  : 'option-value-2',
- *         checked: false
- *     }]);
- *
- **/
+// Function to create a multiselect dropdown that has checkboxes for each option
 (function($){
     var defaults = {
         placeholder   : 'Select options', // text to use in dummy input
@@ -77,7 +52,7 @@
             $(instance.element).addClass('jqmsLoaded');
 
             // add option container
-            $(instance.element).after('<div class="ms-options-wrap"><button>None Selected</button><div class="ms-options"><ul></ul></div></div>');
+            $(instance.element).after('<div class="ms-options-wrap"><button>None Selected</button><div class="ms-options"><ul style="list-style-type: none;"></ul></div></div>');
             var placeholder = $(instance.element).next('.ms-options-wrap').find('> button:first-child');
             var optionsWrap = $(instance.element).next('.ms-options-wrap').find('> .ms-options');
             var optionsList = optionsWrap.find('> ul');
@@ -112,7 +87,7 @@
             }).hide();
 
             // isolate options scroll
-            // @source: https://github.com/nobleclem/jQuery-IsolatedScroll
+
             optionsWrap.bind( 'touchmove mousewheel DOMMouseScroll', function ( e ) {
                 if( ($(this).outerHeight() < $(this)[0].scrollHeight) ) {
                     var e0 = e.originalEvent,
@@ -306,7 +281,7 @@
                     optionsList.find('li.optgroup > ul > li').css({
                         float: 'left',
                         width: (100 / instance.options.columns) +'%'
-                    });
+                   });
                 }
             }
             else {
@@ -389,7 +364,7 @@
                         container.append('<a href="#" class="ms-selectall">Select all</a>')
                     }
 
-                    container.append('<ul></ul>');
+                    container.append('<ul ></ul>');
 
                     for( var gKey in thisOption.options ) {
                         // Prevent prototype methods injected into options from

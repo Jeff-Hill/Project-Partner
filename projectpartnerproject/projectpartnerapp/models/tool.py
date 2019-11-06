@@ -2,6 +2,7 @@ from django.db import models
 from .project import Owner
 
 class Tool(models.Model):
+# Set an owner Foreign Key property so you can filter data to be displayed by the user logged in
 
 
     name = models.CharField(max_length=50)

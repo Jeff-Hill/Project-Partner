@@ -26,7 +26,8 @@ return false;
 
 
 
-
+// Function to dynamically add an empty new material field to the material form so user
+// can add as many materials as needed for their project
 function addMaterialFunction(){
 
     var y = document.createElement("INPUT");

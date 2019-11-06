@@ -1,7 +1,5 @@
 a {
     color: orange;
-
-
 }
 
 nav a:hover {
@@ -29,6 +27,14 @@ body {
     position: absolute;
     width: 100%;
     margin-top: 100px;
+}
+
+.logo {
+    width: auto;
+    height: 90px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 10%;
 }
 
 .navList {

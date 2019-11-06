@@ -11,10 +11,13 @@
     {% endblock %}
   </head>
   <body>
+  {% comment %} Displays the logged in users tool inventory. The user can delete a tool from and here and it will remove any
+  instances of that tool from projects. The user can also edit any existing tools or add new tools to their inventory {% endcomment %}
     {% block content %}
-    <h1>Tools in Inventory</h1>
+    <div class="header">
+    <h1>{{ user.first_name }}'s Tools</h1>
     <button class="btn btn-secondary"> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
-
+    </div>
     <ul class="projects" style="list-style-type:none">
     {% for tool in all_tools %}
           <div class="resource">

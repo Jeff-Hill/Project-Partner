@@ -3,6 +3,7 @@ from django.db.models import F
 from .owner import Owner
 
 class Project(models.Model):
+    # Set an owner Foreign Key property so you can filter data to be displayed by the user logged in
 
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)

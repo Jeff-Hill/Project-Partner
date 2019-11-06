@@ -11,7 +11,6 @@ def project_tool_list(request):
     if request.method == 'POST':
         form_data = request.POST
         tool_id = request.POST.getlist('multicheckbox[]')
-        # project_tool = get_project_tool()
 
 
         with sqlite3.connect(Connection.db_path) as conn:

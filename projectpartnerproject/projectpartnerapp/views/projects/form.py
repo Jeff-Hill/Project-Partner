@@ -45,14 +45,12 @@ def project_edit_form(request, project_id, pk=None):
 
     if request.method == 'GET':
         project = Project.objects.get(pk=project_id)
-        # project_tool = ProjectTool.objects.get()
         tools = get_tools()
 
         template = 'projects/project_edit_form.html'
         context = {
             'project': project,
             'all_tools': tools,
-            # 'project_tools': project_tool
         }
 
         return render(request, template, context)

@@ -9,7 +9,7 @@ class Owner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/', null=True, blank=True, max_length=300, height_field='url_height', width_field='url_width')
 
-
+# Auto create an instance of an owner when a new user registers
 @receiver(post_save, sender=User)
 def create_owner(sender, instance, created, **kwargs):
     if created:
