@@ -1,4 +1,7 @@
 /* CSS to style the multiselect drop down for project tools */
+.ms-options{
+list-style-type: none;
+}
 
 .ms-options-wrap,
 .ms-options-wrap * {

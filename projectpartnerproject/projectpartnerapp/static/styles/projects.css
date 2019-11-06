@@ -1,3 +1,7 @@
+.removeBullet {
+    list-style-type: none;
+}
+
 a {
     color: orange;
     text-decoration: none;

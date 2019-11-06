@@ -52,7 +52,7 @@
             $(instance.element).addClass('jqmsLoaded');
 
             // add option container
-            $(instance.element).after('<div class="ms-options-wrap"><button>None Selected</button><div class="ms-options"><ul></ul></div></div>');
+            $(instance.element).after('<div class="ms-options-wrap"><button>None Selected</button><div class="ms-options"><ul style="list-style-type: none;"></ul></div></div>');
             var placeholder = $(instance.element).next('.ms-options-wrap').find('> button:first-child');
             var optionsWrap = $(instance.element).next('.ms-options-wrap').find('> .ms-options');
             var optionsList = optionsWrap.find('> ul');
@@ -281,7 +281,7 @@
                     optionsList.find('li.optgroup > ul > li').css({
                         float: 'left',
                         width: (100 / instance.options.columns) +'%'
-                    });
+                   });
                 }
             }
             else {
@@ -364,7 +364,7 @@
                         container.append('<a href="#" class="ms-selectall">Select all</a>')
                     }
 
-                    container.append('<ul></ul>');
+                    container.append('<ul ></ul>');
 
                     for( var gKey in thisOption.options ) {
                         // Prevent prototype methods injected into options from

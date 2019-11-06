@@ -35,7 +35,7 @@ tool inventory from a multiselect dropdown {% endcomment %}
       <fieldset class="project__description">
           <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
           {% for tool in all_tools %}
-                    <ul style="list-style-type:none">
+                    <ul class= "list-unstyled">
                     <option value="{{ tool.id }}">{{ tool.name }}</option>
                     </ul>
                 {% endfor %}

@@ -4,11 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link href="{% static 'styles/multiselect.css' %}" rel="stylesheet" type="text/css">
-    <title>Project Partner</title>
     {% block css %}
     <link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
     {% endblock %}
+    <link href="{% static 'styles/multiselect.css' %}" rel="stylesheet" type="text/css">
+    <title>Project Partner</title>
   </head>
   <body>
     {% block content %}
@@ -53,9 +53,9 @@
           </fieldset>
 
 {% comment %} This is the same multiselect dropdown to add more tools to a project {% endcomment %}
-            <fieldset class="project__title">
+            <fieldset class="project__title" style="list-style-type: none;">
                 <label for="tool_id"><strong>Add Tools To Project:</strong> </label>
-                <select style="list-style-type:none" id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
+                <select style="list-style-type: none;" id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive removeBullet">
                 {% for tool in all_tools %}
                           <option style="list-style-type:none" value="{{ tool.id }}">{{ tool.name }}</option>
                       {% endfor %}
