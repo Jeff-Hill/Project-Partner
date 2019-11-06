@@ -9,7 +9,7 @@
   </head>
   <body>
     {% block content %}
-
+{% comment %} Individual display of a single material for the user logged in {% endcomment %}
     <h1>Materials in Inventory</h1>
 
     <ul style="list-style-type:none">
@@ -22,6 +22,7 @@
             <li>Project: {{material.project_id}}</li>
             <br></br>
     {% endfor %}
+{% comment %} Allows user to delete or edit the selected material {% endcomment %}
     </ul>
     <form action="{% url 'projectpartnerapp:material' material.material_id %}" method="POST">
             {% csrf_token %}

@@ -15,7 +15,7 @@
 
     <div class="projects">
       <div class="resource">
-
+      {% comment %} Form to add a new tool or edit an existing tool {% endcomment %}
             <h1 class="project__title">Add Tool to Inventory</h1>
             {% if tool.id is not None %}
             <form action="{% url 'projectpartnerapp:tool' tool.id %}" method="post">

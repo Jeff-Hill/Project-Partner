@@ -14,7 +14,7 @@
   </head>
   <body>
     {% block content %}
-
+{% comment %} The homepage only displays the users Open projects and they can start a new project {% endcomment %}
     {% if request.user.is_authenticated %}
     <div class="header">
       <h2>Welcome, {{ user.first_name }}. Here are your open projects.</h2>

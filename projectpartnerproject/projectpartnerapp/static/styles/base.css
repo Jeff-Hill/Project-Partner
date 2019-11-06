@@ -1,7 +1,5 @@
 a {
     color: orange;
-
-
 }
 
 nav a:hover {
@@ -32,8 +30,6 @@ body {
 }
 
 .logo {
-    /* z-index: -1; */
-    /* position: absolute; */
     width: auto;
     height: 90px;
     margin-right: 10px;

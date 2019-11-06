@@ -13,7 +13,8 @@
   </head>
   <body>
     {% block content %}
-
+{% comment %} Step 2 in the new project creation process allows the user to select multiple tools that are in their
+tool inventory from a multiselect dropdown {% endcomment %}
 
   <div class="projects">
     <div class="project">
@@ -30,9 +31,8 @@
       </fieldset>
 
       <h3 class="project__title">Select Multiple Tools</h3>
-
+{% comment %} The multiselect dropdown with checkboxes to allow user to check multiple tools to add to their project {% endcomment %}
       <fieldset class="project__description">
-          {% comment %} <label for="tool_id">Add Tools: </label> {% endcomment %}
           <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
           {% for tool in all_tools %}
                     <ul style="list-style-type:none">
@@ -43,6 +43,7 @@
       </fieldset>
       <input class="btn btn-secondary btn-lg" type="submit" value="Final Step" />
     </form>
+{% comment %} If the tool they want to add is not in their inventory they can add a new tool to inventory {% endcomment %}
       <h3>Don't have the tool in your inventory?</h3>
       <button class="btn btn-secondary"> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
     </div>

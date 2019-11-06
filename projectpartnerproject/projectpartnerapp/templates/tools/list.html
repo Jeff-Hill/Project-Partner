@@ -11,6 +11,8 @@
     {% endblock %}
   </head>
   <body>
+  {% comment %} Displays the logged in users tool inventory. The user can delete a tool from and here and it will remove any
+  instances of that tool from projects. The user can also edit any existing tools or add new tools to their inventory {% endcomment %}
     {% block content %}
     <div class="header">
     <h1>{{ user.first_name }}'s Tools</h1>

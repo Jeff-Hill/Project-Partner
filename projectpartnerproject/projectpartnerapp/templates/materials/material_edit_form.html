@@ -16,7 +16,7 @@
     <div class="project">
         <h1 class="project__title">Edit Project Material</h1>
 
-
+{% comment %} This form allows a user to update their material to add a description, cost, and quantity {% endcomment %}
         <form action="{% url 'projectpartnerapp:material'  material_id%}" method="post">
 
           {% csrf_token %}
@@ -36,7 +36,7 @@
           </fieldset>
           <fieldset class="project__description">
               <label for="quantity">Quantity: </label>
-              <input id="quantity" type="text" name="quantity" placeholder="Quantity" value="">
+              <input id="quantity" type="number" name="quantity" placeholder="Quantity" value="">
           </fieldset>
           <input type="hidden" name="next" value="{{ next }}">
 

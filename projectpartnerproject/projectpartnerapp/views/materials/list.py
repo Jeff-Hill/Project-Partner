@@ -50,12 +50,14 @@ def material_list(request):
 
     elif request.method == 'POST':
         form_data = request.POST
+        # This gets all the materials that were added in the project creation step as an array that can be iterated over
+        # to insert individual instances into the database table
         list_materials = request.POST.getlist('name[]')
 
 
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
-
+        # Looping over the array of materials for this project and inserting it into the database
             for material in list_materials:
                 db_cursor.execute("""
                 INSERT INTO projectpartnerapp_material

@@ -1,5 +1,4 @@
 {% extends 'shared/base.html' %}
-{% comment %} {% load bootstrap4 %} {% endcomment %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -13,6 +12,8 @@
   </head>
   <body>
     {% block content %}
+    {% comment %} This builds a project edit form using three database tables for projects, tools, and materials and
+    allows the user to edit each section. Project details and tools can be updated together. Materials can be edited individually {% endcomment %}
   <div class="projects">
     <div class="edit">
         <h1 class="project__title"><strong>Edit Project</strong></h1>
@@ -51,12 +52,12 @@
               <input id="completed" type="checkbox" name="completed" value=0>
           </fieldset>
 
-
+{% comment %} This is the same multiselect dropdown to add more tools to a project {% endcomment %}
             <fieldset class="project__title">
                 <label for="tool_id"><strong>Add Tools To Project:</strong> </label>
-                <select id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
+                <select style="list-style-type:none" id="tool_id" name="multicheckbox[]" multiple="multiple" class="4colactive">
                 {% for tool in all_tools %}
-                          <option value="{{ tool.id }}">{{ tool.name }}</option>
+                          <option style="list-style-type:none" value="{{ tool.id }}">{{ tool.name }}</option>
                       {% endfor %}
                 </select>
             </fieldset>
@@ -64,6 +65,7 @@
           <input type="submit" value="Update" />
         </form>
         <br></br>
+  {% comment %} This displays the initial tools that were added to the project. They can be deleted if necessary {% endcomment %}
         <h3 class="project__title"><strong>Current Project Tools</strong></h3>
             <ul style="list-style-type:none">
                     {% for project_tool in project.tool_list.all %}
@@ -78,14 +80,13 @@
             </ul>
             <br></br>
         <h3 class="project__title"><strong>Your Project Materials</strong></h3>
-
+{% comment %} Edit, Delete an initial material or add a new material {% endcomment %}
               {% for material in project.materials.all %}
 
                 <li class="project_description">Material Name: {{ material.name }}</li>
                 <li class="project_description">Description: {{material.description}}</li>
                 <li class="project_description">Cost: {{material.cost}}</li>
                 <li class="project_description">Quantity: {{material.quantity}}</li>
-                {% comment %} <li class="project_description">Project: {{material.project_id}}</li> {% endcomment %}
                 <form action="{% url 'projectpartnerapp:material_edit_form' material.id %}" method="GET">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="/projects">

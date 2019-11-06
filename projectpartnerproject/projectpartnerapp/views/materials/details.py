@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
 
-
+# Retrieve a single material from the database by its id
 def get_material(material_id):
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = sqlite3.Row
@@ -46,6 +46,7 @@ def material_details(request, material_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):
+        # Retrieves the hidden field with name "next" and it's URL path value to use as a redirect for when a material is edited
             next = form_data["next"]
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
@@ -65,7 +66,6 @@ def material_details(request, material_id):
                     form_data['project_id'], material_id
                 ))
 
-            # return redirect(reverse(next))
             return HttpResponseRedirect(next)
 
         if (

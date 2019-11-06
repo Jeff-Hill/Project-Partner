@@ -13,13 +13,15 @@
   <body>
     {% block content %}
 
-
+{% comment %} This is the form used to add a new material during the project creation process OR the add new material button in project details {% endcomment %}
   <div class="projects">
     <div class="project">
     <h1 class="project__title">Final Step: Add Materials</h1>
     <form action="{% url 'projectpartnerapp:materials' %}" method="post">
       {% csrf_token %}
       <label class="project__title" for="project">Add to Project: </label>
+{% comment %} Only requiring the user to enter a material name upon initial project creation. They will be able
+to update this material after they've purchased the materials and have the details to do so {% endcomment %}
       <fieldset>
           <select id="project" type="text" name="project_id">
                 {% for project in all_projects %}
@@ -28,12 +30,15 @@
           </select>
       </fieldset>
       <label class="project__title" for="name">Materials</label>
+      {% comment %} The name attribute of an empty array collects all the materials added to a project for iteration
+      and insertion into the database table {% endcomment %}
       <fieldset id="myForm" name="name[]">
           <input id="name[]" type="text" name="name[]" placeholder="material name">
       </fieldset>
-      <input type="submit" value="Add Materials" />
+      <input type="submit" value="Finish Creating Project" />
     </form>
-      <button onclick="addMaterialFunction()">Add Material</button>
+    {% comment %} Clicking this button invokes the javascript function to add an empty text field {% endcomment %}
+      <button onclick="addMaterialFunction()">Add More Materials</button>
     <script src="{% static 'scripts/add_material.js' %}"></script>
     </div>
     </div>
