@@ -31,6 +31,16 @@ body {
     margin-top: 100px;
 }
 
+.logo {
+    /* z-index: -1; */
+    /* position: absolute; */
+    width: auto;
+    height: 90px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 10%;
+}
+
 .navList {
     list-style-type: none;
     display: flex;

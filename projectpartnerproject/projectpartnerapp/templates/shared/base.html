@@ -20,6 +20,8 @@
 
     <nav id="site-nav">
         <ol class="navList">
+        <img class="logo" src="{% static "images/project-partner-logo.png" %}" alt="Project Partner Logo">
+            {% comment %} <h2>Project Partner</h2> {% endcomment %}
             <li class="navList__route"><a class="text-decoration: none" href="{% url 'projectpartnerapp:home' %}">Home</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:projects' %}">Projects</a></li>
             <li class="navList__route"><a href="{% url 'projectpartnerapp:tools' %}">Tools</a></li>
