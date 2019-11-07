@@ -5,6 +5,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from projectpartnerapp.models import Tool
 from ..connection import Connection
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 @login_required
 def tool_list(request):
@@ -50,7 +52,7 @@ def tool_list(request):
 
     elif request.method == 'POST':
         form_data = request.POST
-
+        # next = form_data["next"]
         with sqlite3.connect(Connection.db_path) as conn:
             db_cursor = conn.cursor()
 
@@ -65,5 +67,7 @@ def tool_list(request):
             (form_data['name'], form_data['manufacturer'],
                 form_data['description'], form_data['cost'],
                 form_data["own"], request.user.owner.id))
+
+        # return HttpResponseRedirect(next)
 
         return redirect(reverse('projectpartnerapp:tools'))

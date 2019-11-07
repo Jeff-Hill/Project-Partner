@@ -16,6 +16,7 @@
     {% block content %}
     <div class="header">
     <h1>{{ user.first_name }}'s Tools</h1>
+    {% comment %} <input type="hidden" name="next" value="{{ next }}"> {% endcomment %}
     <button class="btn btn-secondary"> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
     </div>
     <ul class="projects" style="list-style-type:none">

@@ -20,6 +20,8 @@
       <h2>Welcome, {{ user.first_name }}. Here are your open projects.</h2>
 
     <button class="btn btn-secondary"><a class="text-decoration:none" href="{% url 'projectpartnerapp:project_form' %}">Create New Project</a></button>
+    <button class="btn btn-secondary"><a class="text-decoration:none" href="{% url 'projectpartnerapp:project_tool_form' %}">Add Project Tools</a></button>
+    <button class="btn btn-secondary"><a class="text-decoration:none" href="{% url 'projectpartnerapp:material_form' %}">Add Project Materials</a></button>
   </div>
     <ul class="projects" style="list-style-type:none">
     {% for project in all_projects %}
@@ -48,7 +50,7 @@
     {% endfor %}
     </ul>
       {% else %}
-          <h2>Welcome, new user. Please Login or Register.</h2>
+          <h2>Welcome! Please Login or Register.</h2>
     {% endif %}
     {% endblock %}
 

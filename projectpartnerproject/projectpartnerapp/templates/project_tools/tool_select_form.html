@@ -45,6 +45,7 @@ tool inventory from a multiselect dropdown {% endcomment %}
     </form>
 {% comment %} If the tool they want to add is not in their inventory they can add a new tool to inventory {% endcomment %}
       <h3>Don't have the tool in your inventory?</h3>
+      {% comment %} <input type="hidden" name="next" value="/project-tool/form"> {% endcomment %}
       <button class="btn btn-secondary"> <a href="{% url 'projectpartnerapp:new_tool_form' %}">Add New Tool </a></button>
     </div>
     </div>
