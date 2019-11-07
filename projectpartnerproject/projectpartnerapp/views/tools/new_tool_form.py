@@ -27,9 +27,11 @@ def get_tools():
 def new_tool_form(request):
     if request.method == 'GET':
         tools = get_tools()
+        # next = request.GET['next']
         template = 'tools/new_tool_form.html'
         context = {
-            'all_tools': tools
+            'all_tools': tools,
+            # "next": next
         }
 
         return render(request, template, context)

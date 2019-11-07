@@ -58,6 +58,8 @@
               <input type="hidden" name="actual_method" value="PUT">
               <input type="submit" value="Update Tool" />
               {% else %}
+              {% comment %} <input type="hidden" name="next" value="{{ next }}"> {% endcomment %}
+
               <input type="submit" value="Add Tool" />
             {% endif %}
 
